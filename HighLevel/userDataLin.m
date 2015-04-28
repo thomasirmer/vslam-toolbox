@@ -1,3 +1,4 @@
+
 % USERDATALIN  User data for SLAMTB - Example with lines.
 %   This is a particular case of USERDATA.M. It is intended for
 %   demonstration of the SLAM toolbox with lines. Try the following line
@@ -309,4 +310,3 @@ ExpOpt = struct(...
 %   See on top of this file for its particular copyright.
 
 %   # END GPL LICENSE
-

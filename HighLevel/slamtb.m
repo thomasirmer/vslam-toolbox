@@ -109,7 +109,13 @@ for currentFrame = Tim.firstFrame : Tim.lastFrame
         % and act as a clear reference. The noise is additive to the
         % control input 'u'.
         Rob(rob).con.u = SimRob(rob).con.u + Rob(rob).con.uStd.*randn(size(Rob(rob).con.uStd));
+        % *************************************************************************
+        % C/C++ PORTIERUNG
+        % *************************************************************************
         Rob(rob) = motion(Rob(rob),Tim);
+        % *************************************************************************
+        % C/C++ PORTIERUNG
+        % *************************************************************************
         
         Map.t = Map.t + Tim.dt;
                
@@ -178,7 +184,7 @@ for currentFrame = Tim.firstFrame : Tim.lastFrame
         % Do draw all objects
         drawnow;
     end    
-
+    
     % 4. DATA LOGGING
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % TODO: do something here to collect data for post-processing or

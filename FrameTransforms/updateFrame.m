@@ -39,6 +39,7 @@ F.Pi = q2Pi(F.q);
 F.Pc = pi2pc(F.Pi);
 % F.it = -F.R'*F.t;
 % F.iq = [1;-1;-1;-1].*F.q;
+end
 
 
 

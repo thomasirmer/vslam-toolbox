@@ -10,15 +10,33 @@ function Rob = map2rob(Rob)
 global Map
 
 % normalize quaternion - mean and cov
-[Map.x(Rob.frame.r(4:7)), NQ_q] = normvec(Map.x(Rob.frame.r(4:7)),1);
-Map.P(Rob.frame.r(4:7),Map.used) = NQ_q*Map.P(Rob.frame.r(4:7),Map.used);
-Map.P(Map.used,Rob.frame.r(4:7)) = Map.P(Map.used,Rob.frame.r(4:7))*NQ_q';
+% *************************************************************************
+% C/C++ PORTIERUNG
+% *************************************************************************
+% -- MATLAB --
+%[Map.x(Rob.frame.r(4:7)), NQ_q] = normvec(Map.x(Rob.frame.r(4:7)),1);
+% -- C/C++ --
+[Map.x(Rob.frame.r(4:7)), NQ_q] = normvec_c(Map.x(Rob.frame.r(4:7)),1);
+
+% -- MATLAB --
+%Map.P(Rob.frame.r(4:7),Map.used) = NQ_q*Map.P(Rob.frame.r(4:7),Map.used);
+%Map.P(Map.used,Rob.frame.r(4:7)) = Map.P(Map.used,Rob.frame.r(4:7))*NQ_q';
+% -- C/C++ --
+Map.P(Rob.frame.r(4:7),Map.used) = MatrixMul(NQ_q, Map.P(Rob.frame.r(4:7),Map.used));
+Map.P(Map.used,Rob.frame.r(4:7)) = MatrixMul(Map.P(Map.used,Rob.frame.r(4:7)), MatrixTranspose(NQ_q));
 
 % means
 Rob.state.x = Map.x(Rob.state.r);
 Rob.frame.x = Map.x(Rob.frame.r);
 
+% -- MATLAB --
 Rob.frame   = updateFrame(Rob.frame);
+% -- C/C++ --
+%Rob.frame   = updateFrame_c(Rob.frame);
+% *************************************************************************
+% C/C++ PORTIERUNG
+% *************************************************************************
+
 
 % covariances
 % Rob.state.P = Map.P(Rob.state.r,Rob.state.r);
