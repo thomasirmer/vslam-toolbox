@@ -33,8 +33,7 @@ Rob.frame.x = Map.x(Rob.frame.r);
 %Rob.frame   = updateFrame(Rob.frame);
 % -- C/C++ --
 frame_temp   = updateFrame_c(Rob.frame);
-% only assign the values that have been affected by updateFrame - the
-% others might be inconsistent
+% only 
 Rob.frame.x  = frame_temp.x;
 Rob.frame.t  = frame_temp.t;
 Rob.frame.q  = frame_temp.q;
@@ -42,6 +41,7 @@ Rob.frame.R  = frame_temp.R;
 Rob.frame.Rt = frame_temp.Rt;
 Rob.frame.Pi = frame_temp.Pi;
 Rob.frame.Pc = frame_temp.Pc;
+clearvars frame_temp;
 % *************************************************************************
 % C/C++ PORTIERUNG
 % *************************************************************************
