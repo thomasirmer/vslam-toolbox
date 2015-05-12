@@ -75,12 +75,13 @@ void mexFunction(int nlhs, mxArray *plhs[],
 
 	// -- FUNCTION START --
 	if (nrhs > 1 && norm == true) {
+		printf("(!) updateFrame: You called this function with norm == true. This is currently not implemented (!)\n");
 		// TODO: F.x(4:7)  = normvec(F.x(4:7)); --> normvec currently only available as mex-function
 	}
 
 	F->t	= getRoi(F->x, 0, 2, 0, 0);	
 	F->q	= getRoi(F->x, 3, 6, 0, 0);
-	q2R(F->q, F->R, F->R, false);
+	q2R(F->q, F->R);
 	F->Rt	= F->R.t();
 	F->Pi	= q2Pi(F->q);
 	F->Pc	= pi2pc(F->Pi);
@@ -96,6 +97,9 @@ void mexFunction(int nlhs, mxArray *plhs[],
 	double *data_out;
 
 	for (int i = 0; i < nFieldsPerStruct; i++) {
+
+		const char* name = mxGetFieldNameByNumber(plhs[0], i);
+
 		if (strcmp(mxGetFieldNameByNumber(plhs[0], i), "x") == 0) {
 			data_mx = mxCreateDoubleMatrix(F->x.rows, F->x.cols, mxREAL);
 			data_out = (double*) mxGetData(data_mx);
@@ -124,7 +128,8 @@ void mexFunction(int nlhs, mxArray *plhs[],
 			data_mx = mxCreateDoubleMatrix(F->Pc.rows, F->Pc.cols, mxREAL);
 			data_out = (double*) mxGetData(data_mx);
 			openCVMat2MatlabMat(F->Pc, data_out);
-		}
+		} else // found field name that does not get updated in this function
+			continue;
 
 		mxSetFieldByNumber(plhs[0], 0, i, data_mx);
 	}
