@@ -36,6 +36,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
     // Create OpenCV data types
     Mat A = matlabMat2OpenCVMat(mat_in, nRows, nCols);
 
+
 	// Get ROI
 	Mat roi = getRoi(A, fromRow - 1, toRow - 1, fromCol - 1, toCol - 1);
 

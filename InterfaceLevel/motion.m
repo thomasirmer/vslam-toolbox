@@ -43,11 +43,19 @@ switch Rob.motion
         % Covariances matrix update
         predictBlockEkf(r, F_x, Rob.con.U, F_u);
         
-       
+        
     case  {'odometry'}  % 3D odometry
+        
+        % *************************************************************************
+        % C/C++ PORTIERUNG
+        % *************************************************************************
         
         % motion model of the robot: mean and Jacobians
         [Rob.frame, F_x, F_u]   = odo3(Rob.frame,Rob.con.u);
+        
+        % *************************************************************************
+        % C/C++ PORTIERUNG
+        % *************************************************************************
         
         % update Rob and Map structures - mean only
         Map.x(Rob.frame.r) = Rob.frame.x;

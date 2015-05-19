@@ -1,6 +1,6 @@
 
-#ifndef DATA_TYPE_PRASING_HPP
-#define DATA_TYPE_PRASING_HPP
+#ifndef DATA_TYPE_PARSING_HPP
+#define DATA_TYPE_PARSING_HPP
 
 #include <opencvmex.hpp>
 
@@ -45,4 +45,4 @@ void openCVMat2MatlabMat(Mat matrix, double* data) {
 	}
 }
 
-#endif // DATA_TYPE_PRASING_HPP
+#endif // DATA_TYPE_PARSING_HPP

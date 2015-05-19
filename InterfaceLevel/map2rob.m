@@ -22,7 +22,7 @@ global Map
 %Map.P(Rob.frame.r(4:7),Map.used) = NQ_q*Map.P(Rob.frame.r(4:7),Map.used);
 %Map.P(Map.used,Rob.frame.r(4:7)) = Map.P(Map.used,Rob.frame.r(4:7))*NQ_q';
 % -- C/C++ --
-Map.P(Rob.frame.r(4:7),Map.used) = MatrixMul(NQ_q, Map.P(Rob.frame.r(4:7),Map.used));
+Map.P(Rob.frame.r(4:7),Map.used) = MatrixMul(NQ_q, Map.P(Rob.frame.r(4:7), Map.used));
 Map.P(Map.used,Rob.frame.r(4:7)) = MatrixMul(Map.P(Map.used,Rob.frame.r(4:7)), MatrixTranspose(NQ_q));
 
 % means

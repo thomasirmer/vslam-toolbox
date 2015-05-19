@@ -18,11 +18,23 @@ dv = u(4:6);
 dx = u(1:3);
 
 if nargout == 1
-
-    x = fromFrame(F,dx); % Position update
-
+    
+    % *************************************************************************
+    % C/C++ PORTIERUNG
+    % *************************************************************************
+    
+    % x = fromFrame(F,dx); % Position update
+    x = fromFrame_c(F, dx);
+    
     q  = F.x(4:end);
+    
+    % TODO: v2q
     q2 = qProd(q,v2q(dv)); % quaternion update
+    % q2 = qProd_c(q,v2q(dv));
+    
+    % *************************************************************************
+    % C/C++ PORTIERUNG
+    % *************************************************************************
 
     F.x = [x;q2]; % frame update
 
@@ -42,7 +54,24 @@ else  % Jacobians
     F_u  = [X_dx zeros(3,3);zeros(4,3) Q2_dv];
 end
 
-F = updateFrame(F);
+% *************************************************************************
+% C/C++ PORTIERUNG
+% *************************************************************************
+
+F_temp = updateFrame_c(F);
+% only assign the values that have been affected by updateFrame - the
+% others might be inconsistent
+F.x  = F_temp.x;
+F.t  = F_temp.t;
+F.q  = F_temp.q;
+F.R  = F_temp.R;
+F.Rt = F_temp.Rt;
+F.Pi = F_temp.Pi;
+F.Pc = F_temp.Pc;
+
+% *************************************************************************
+% C/C++ PORTIERUNG
+% *************************************************************************
 
 return
 
