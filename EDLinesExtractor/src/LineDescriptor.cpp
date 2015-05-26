@@ -38,7 +38,10 @@
  */
 
 #include "LineDescriptor.hpp"
-#include <opencv2/line_descriptor.hpp>
+//#include <opencv2/line_descriptor.hpp>
+
+#include <opencvmex.hpp>
+
 #define SalienceScale 0.9//0.9
 
 //#define DEBUGLinesInOctaveImages
