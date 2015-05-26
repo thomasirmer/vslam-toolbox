@@ -71,5 +71,8 @@
     <ClInclude Include="..\..\PrintOpenCVStructures.hpp">
       <Filter>Quelldateien</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\FrameTransforms\Rotations\v2au.hpp">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

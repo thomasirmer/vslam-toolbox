@@ -94,6 +94,7 @@
     <ClInclude Include="..\..\..\FrameTransforms\Rotations\pi2pc_c.hpp" />
     <ClInclude Include="..\..\..\FrameTransforms\Rotations\q2pi_c.hpp" />
     <ClInclude Include="..\..\..\FrameTransforms\Rotations\q2R_c.hpp" />
+    <ClInclude Include="..\..\..\FrameTransforms\Rotations\v2au.hpp" />
     <ClInclude Include="..\..\DataTypeParsing.hpp" />
     <ClInclude Include="..\..\MatrixRoi.hpp" />
     <ClInclude Include="..\..\PrintOpenCVStructures.hpp" />
