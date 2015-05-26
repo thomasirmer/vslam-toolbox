@@ -20,10 +20,10 @@ dx = u(1:3);
 if nargout == 1
     
     % *************************************************************************
-    % C/C++ PORTIERUNG
+    % C/C++ PORTIERUNG (noch offen)
     % *************************************************************************
     
-    % x = fromFrame(F,dx); % Position update
+    %x = fromFrame(F,dx); % Position update
     x = fromFrame_c(F, dx);
     
     q  = F.x(4:end);
@@ -33,7 +33,7 @@ if nargout == 1
     % q2 = qProd_c(q,v2q(dv));
     
     % *************************************************************************
-    % C/C++ PORTIERUNG
+    % C/C++ PORTIERUNG (noch offen)
     % *************************************************************************
 
     F.x = [x;q2]; % frame update

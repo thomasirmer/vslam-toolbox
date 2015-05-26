@@ -77,6 +77,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\updateFrame_c.cpp" />
     <ClCompile Include="..\..\..\HighLevel\userDataLin.cpp" />
     <ClCompile Include="..\..\..\Math\normvec_c.cpp" />

@@ -42,6 +42,9 @@
     <ClCompile Include="..\..\..\HighLevel\userDataLin.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\DataTypeParsing.hpp">

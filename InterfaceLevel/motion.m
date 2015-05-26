@@ -19,11 +19,11 @@ global Map
 
 % Update rob and sen info from map
 % *************************************************************************
-% C/C++ PORTIERUNG
+% C/C++ PORTIERUNG (erledigt)
 % *************************************************************************
 Rob = map2rob(Rob);
 % *************************************************************************
-% C/C++ PORTIERUNG
+% C/C++ PORTIERUNG (erledigt)
 % *************************************************************************
 
 % robot state range
@@ -47,14 +47,14 @@ switch Rob.motion
     case  {'odometry'}  % 3D odometry
         
         % *************************************************************************
-        % C/C++ PORTIERUNG
+        % C/C++ PORTIERUNG (noch offen)
         % *************************************************************************
         
         % motion model of the robot: mean and Jacobians
         [Rob.frame, F_x, F_u]   = odo3(Rob.frame,Rob.con.u);
         
         % *************************************************************************
-        % C/C++ PORTIERUNG
+        % C/C++ PORTIERUNG (noch offen)
         % *************************************************************************
         
         % update Rob and Map structures - mean only

@@ -29,6 +29,8 @@
 
 %% OK we start here
 
+tic;
+
 % clear workspace and declare globals
 clear
 global Map    
@@ -197,7 +199,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Enter post-processing code here
 
-
+toc;
 
 % ========== End of function - Start GPL license ==========
 
