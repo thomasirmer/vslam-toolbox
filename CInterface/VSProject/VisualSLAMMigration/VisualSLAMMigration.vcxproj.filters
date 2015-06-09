@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Quelldateien\EDLineDetector">
+      <UniqueIdentifier>{93bd9a4b-7963-44e0-bf10-2b3f4c0df185}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Points\fromFrame_c.cpp">
@@ -45,6 +48,18 @@
     <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\mFiles\EDLinesExtractor.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\EDLineDetector.cpp">
+      <Filter>Quelldateien\EDLineDetector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineDescriptor.cpp">
+      <Filter>Quelldateien\EDLineDetector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.cpp">
+      <Filter>Quelldateien\EDLineDetector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\DataTypeParsing.hpp">
@@ -73,6 +88,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\FrameTransforms\Rotations\v2au.hpp">
       <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\EDLinesExtractor\EDLineDetector.hpp">
+      <Filter>Quelldateien\EDLineDetector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineDescriptor.hpp">
+      <Filter>Quelldateien\EDLineDetector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineStructure.hpp">
+      <Filter>Quelldateien\EDLineDetector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.hpp">
+      <Filter>Quelldateien\EDLineDetector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

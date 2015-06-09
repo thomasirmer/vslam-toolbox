@@ -1,0 +1,19 @@
+﻿Build started 02.06.2015 15:59:45.
+     1>Project "C:\Users\thomai\Documents\MATLAB\slamToolbox\EDLinesExtractor\bin\TestLineMatchingAlgorithm.vcxproj" on node 2 (Rebuild target(s)).
+     1>CustomBuild:
+         Building Custom Rule C:/Users/thomai/Downloads/LBD_Descriptor-master/LBD_Descriptor-master/CMakeLists.txt
+         CMake does not need to re-run because C:\Users\thomai\Documents\MATLAB\slamToolbox\EDLinesExtractor\bin\CMakeFiles\generate.stamp is up-to-date.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /IC:\Users\thomai\Documents\opencv_2_4_11\build\include /nologo /W3 /WX- /O2 /Ob2 /D WIN32 /D _WINDOWS /D NDEBUG /D "CMAKE_INTDIR=\"Release\"" /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"TestLineMatchingAlgorithm.dir\Release\\" /Fd"TestLineMatchingAlgorithm.dir\Release\vc110.pdb" /Gd /TP /errorReport:prompt  -std=c++11 -O3 "C:\Users\thomai\Downloads\LBD_Descriptor-master\LBD_Descriptor-master\TestLineMatchingAlgorithm.cpp"
+     1>cl : Command line warning D9002: ignoring unknown option '-std=c++11'
+     1>cl : Command line warning D9002: ignoring unknown option '-O3'
+         TestLineMatchingAlgorithm.cpp
+     1>c:\users\thomai\downloads\lbd_descriptor-master\lbd_descriptor-master\LineDescriptor.hpp(73): warning C4042: 'criteria' : has bad storage class
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\thomai\Documents\MATLAB\slamToolbox\EDLinesExtractor\bin\Release\TestLineMatchingAlgorithm.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\Users\thomai\Documents\opencv_2_4_11\build\x64\vc11\lib /LIBPATH:C:\Users\thomai\Documents\MATLAB\slamToolbox\EDLinesExtractor\bin\Release kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib opencv_core2411.lib opencv_highgui2411.lib opencv_imgproc2411.lib LineMatchingLib.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:/Users/thomai/Documents/MATLAB/slamToolbox/EDLinesExtractor/bin/Release/TestLineMatchingAlgorithm.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/thomai/Documents/MATLAB/slamToolbox/EDLinesExtractor/bin/Release/TestLineMatchingAlgorithm.lib" /MACHINE:X64  /machine:x64 TestLineMatchingAlgorithm.dir\Release\TestLineMatchingAlgorithm.obj
+         TestLineMatchingAlgorithm.vcxproj -> C:\Users\thomai\Documents\MATLAB\slamToolbox\EDLinesExtractor\bin\Release\TestLineMatchingAlgorithm.exe
+     1>Done Building Project "C:\Users\thomai\Documents\MATLAB\slamToolbox\EDLinesExtractor\bin\TestLineMatchingAlgorithm.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.08

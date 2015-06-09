@@ -39,7 +39,8 @@ global Map
 
 % userData;           % user-defined data. SCRIPT.
 % userDataPnt;        % user-defined data for points. SCRIPT.
-userDataLin;        % user-defined data for lines. SCRIPT.
+% userDataLin;        % user-defined data for lines. SCRIPT.
+customUserDataLin;
 
 
 %% II. Initialize all data structures from user-defined data in userData.m
@@ -74,6 +75,7 @@ userDataLin;        % user-defined data for lines. SCRIPT.
 % Clear user data - not needed anymore
 clear Robot Sensor World Time   % clear all user data
 
+hFigure = figure;
 
 %% IV. Main loop
 for currentFrame = Tim.firstFrame : Tim.lastFrame
@@ -81,25 +83,68 @@ for currentFrame = Tim.firstFrame : Tim.lastFrame
     % 1. SIMULATION
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    % Simulate robots
-    for rob = [SimRob.rob]
+%     % Simulate robots
+%     for rob = [SimRob.rob]
+% 
+%         % Robot motion
+%         SimRob(rob) = simMotion(SimRob(rob),Tim);
+%         
+%         % Simulate sensor observations
+%         for sen = SimRob(rob).sensors
+% 
+%             % Observe simulated landmarks
+%             Raw(sen) = simObservation(SimRob(rob), SimSen(sen), SimLmk, SimOpt) ;
+% 
+%         end % end process sensors
+% 
+%     end % end process robots
 
-        % Robot motion
-        SimRob(rob) = simMotion(SimRob(rob),Tim);
+%coordsXY = load('points.dat');
+for rob = [Rob.rob]
+    for sen = Rob(rob).sensors
+        Raw(sen).type = 'image';
+        Raw(sen).data = struct('points',[],'segments',[], 'img',[]);
+        Raw(sen).data.segments = struct('coord',[],'app',[]);
+        Raw(sen).data.points = struct('coord',[],'app',[]);
         
-        % Simulate sensor observations
-        for sen = SimRob(rob).sensors
+        % -----------------------------------------------------------------
+        % REPLACE THIS WITH LINE DETECTION-C++-CODE
+%          selCols = coordsXY(coordsXY(:,1) == currentFrame,:);
+%          [sortedUm1,sortedIdx1] = sort(selCols(:,7),1,'descend');
+%          
+%          Raw(sen).data.segments.coord = selCols(sortedIdx1,3:6)';
+%          Raw(sen).data.segments.app = selCols(sortedIdx1,2)';
+        % -----------------------------------------------------------------
+        % TODO: Get line features for 'Raw(sen).data.segments.coord' from
+        % image with EDLinesExtractor!
+        if (currentFrame < Tim.lastFrame)
+            imagePath1 = sprintf('./Datasets/shoe/shoe_%03d.jpg', currentFrame);
+            imagePath2 = sprintf('./Datasets/shoe/shoe_%03d.jpg', currentFrame + 1);
+            imageBefore = mat2gray(rgb2gray(imread(imagePath1)));
+            Raw(sen).data.img = mat2gray(rgb2gray(imread(imagePath2)));
+            test = EDLinesExtractor(imageBefore, Raw(sen).data.img);
+            
+            % ---- BEGIN DEBUG ----
+            hFigure;
+            imshow(Raw(sen).data.img);
+            hold on;
+            
+            x = [test(:,2)' ; test(:,4)'];
+            y = [test(:,3)' ; test(:,5)'];
+            
+            plot(x, y);
+            hold off;
+            % ----- END DEBUG -----
+        end
+        
+        %[coord, app] = EDLinesExtractor(Raw(sen).data.img);
+        % -----------------------------------------------------------------
+    end
+end
 
-            % Observe simulated landmarks
-            Raw(sen) = simObservation(SimRob(rob), SimSen(sen), SimLmk, SimOpt) ;
 
-        end % end process sensors
-
-    end % end process robots
-
-    
-    % 2. ESTIMATION
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. ESTIMATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     % Process robots
     for rob = [Rob.rob]
@@ -111,13 +156,7 @@ for currentFrame = Tim.firstFrame : Tim.lastFrame
         % and act as a clear reference. The noise is additive to the
         % control input 'u'.
         Rob(rob).con.u = SimRob(rob).con.u + Rob(rob).con.uStd.*randn(size(Rob(rob).con.uStd));
-        % *************************************************************************
-        % C/C++ PORTIERUNG
-        % *************************************************************************
         Rob(rob) = motion(Rob(rob),Tim);
-        % *************************************************************************
-        % C/C++ PORTIERUNG
-        % *************************************************************************
         
         Map.t = Map.t + Tim.dt;
                
@@ -186,7 +225,7 @@ for currentFrame = Tim.firstFrame : Tim.lastFrame
         % Do draw all objects
         drawnow;
     end    
-    
+
     % 4. DATA LOGGING
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % TODO: do something here to collect data for post-processing or

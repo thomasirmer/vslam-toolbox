@@ -1,0 +1,1 @@
+mexOpenCV 'EDLinesExtractor.cpp' 'EDLineDetector.cpp' 'LineDescriptor.cpp'

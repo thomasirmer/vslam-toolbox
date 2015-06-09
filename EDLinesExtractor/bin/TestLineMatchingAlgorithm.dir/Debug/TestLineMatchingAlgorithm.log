@@ -1,0 +1,13 @@
+﻿Build started 02.06.2015 11:20:29.
+     1>Project "C:\Users\thomai\Documents\MATLAB\slamToolbox\EDLinesExtractor\bin\TestLineMatchingAlgorithm.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"TestLineMatchingAlgorithm.dir\Debug\\" /Fd"TestLineMatchingAlgorithm.dir\Debug\vc110.pdb" /Gd /TP /errorReport:prompt  -std=c++11 -O3 "C:\Users\thomai\Downloads\LBD_Descriptor-master\LBD_Descriptor-master\TestLineMatchingAlgorithm.cpp"
+     1>cl : Command line warning D9002: ignoring unknown option '-std=c++11'
+     1>cl : Command line warning D9002: ignoring unknown option '-O3'
+         TestLineMatchingAlgorithm.cpp
+     1>C:\Users\thomai\Downloads\LBD_Descriptor-master\LBD_Descriptor-master\TestLineMatchingAlgorithm.cpp(46): fatal error C1083: Cannot open include file: 'LineDescriptor.hh': No such file or directory
+     1>Done Building Project "C:\Users\thomai\Documents\MATLAB\slamToolbox\EDLinesExtractor\bin\TestLineMatchingAlgorithm.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.38

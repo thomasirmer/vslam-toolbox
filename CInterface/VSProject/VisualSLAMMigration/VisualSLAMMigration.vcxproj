@@ -77,6 +77,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\EDLinesExtractor\EDLineDetector.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineDescriptor.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\mFiles\EDLinesExtractor.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\updateFrame_c.cpp" />
     <ClCompile Include="..\..\..\HighLevel\userDataLin.cpp" />
@@ -90,6 +94,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\DataManagement\split_c.hpp" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\EDLineDetector.hpp" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineDescriptor.hpp" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineStructure.hpp" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.hpp" />
     <ClInclude Include="..\..\..\FrameTransforms\frame_c.hpp" />
     <ClInclude Include="..\..\..\FrameTransforms\Rotations\pi2pc_c.hpp" />
     <ClInclude Include="..\..\..\FrameTransforms\Rotations\q2pi_c.hpp" />

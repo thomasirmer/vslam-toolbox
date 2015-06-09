@@ -1,0 +1,10 @@
+﻿Build started 02.06.2015 13:47:26.
+     1>Project "C:\Users\thomai\Documents\MATLAB\slamToolbox\EDLinesExtractor\bin\ALL_BUILD.vcxproj" on node 2 (Build target(s)).
+     1>CustomBuild:
+         Building Custom Rule C:/Users/thomai/Downloads/LBD_Descriptor-master/LBD_Descriptor-master/CMakeLists.txt
+         CMake does not need to re-run because C:\Users\thomai\Documents\MATLAB\slamToolbox\EDLinesExtractor\bin\CMakeFiles\generate.stamp is up-to-date.
+     1>Done Building Project "C:\Users\thomai\Documents\MATLAB\slamToolbox\EDLinesExtractor\bin\ALL_BUILD.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.12

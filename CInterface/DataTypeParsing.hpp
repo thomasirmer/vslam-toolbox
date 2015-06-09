@@ -32,6 +32,22 @@ Mat getOpenCVMatFromMxArray(const mxArray* mxArrayData) {
     return matlabMat2OpenCVMat(data, nRows, nCols);
 }
 
+Mat getImageFromMxArray(const mxArray* mxArrayData, int type = CV_8UC1) {
+	double* data = (double*) mxGetData(mxArrayData);
+    size_t nRows = mxGetM(mxArrayData);
+    size_t nCols = mxGetN(mxArrayData);
+    
+	Mat image(nRows, nCols, type);
+
+	for (int row = 0; row < nRows; row++) {
+		for (int col = 0; col < nCols; col++) {
+			image.at<unsigned char>(row, col) = (unsigned char) cvRound(data[col * nRows + row] * 255);
+		}
+	}
+
+	return image;
+}
+
 // OPENCV --> MATLAB
 
 void openCVMat2MatlabMat(Mat matrix, double* data) {
