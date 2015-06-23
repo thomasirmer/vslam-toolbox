@@ -48,9 +48,6 @@
     <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\EDLinesExtractor\mFiles\EDLinesExtractor.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\EDLinesExtractor\EDLineDetector.cpp">
       <Filter>Quelldateien\EDLineDetector</Filter>
     </ClCompile>
@@ -58,6 +55,9 @@
       <Filter>Quelldateien\EDLineDetector</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.cpp">
+      <Filter>Quelldateien\EDLineDetector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor.cpp">
       <Filter>Quelldateien\EDLineDetector</Filter>
     </ClCompile>
   </ItemGroup>

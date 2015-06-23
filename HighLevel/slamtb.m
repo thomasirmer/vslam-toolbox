@@ -120,17 +120,17 @@ for rob = [Rob.rob]
         if (currentFrame < Tim.lastFrame)
             imagePath1 = sprintf('./Datasets/shoe/shoe_%03d.jpg', currentFrame);
             imagePath2 = sprintf('./Datasets/shoe/shoe_%03d.jpg', currentFrame + 1);
-            imageBefore = mat2gray(rgb2gray(imread(imagePath1)));
+            image1 = mat2gray(rgb2gray(imread(imagePath1)));
             Raw(sen).data.img = mat2gray(rgb2gray(imread(imagePath2)));
-            test = EDLinesExtractor(imageBefore, Raw(sen).data.img);
+            [lines1, lines2] = EDLinesExtractor(image1, Raw(sen).data.img);
             
             % ---- BEGIN DEBUG ----
             hFigure;
-            imshow(Raw(sen).data.img);
+            imshow(image1);
             hold on;
             
-            x = [test(:,2)' ; test(:,4)'];
-            y = [test(:,3)' ; test(:,5)'];
+            x = [lines1(:,2)' ; lines1(:,4)'];
+            y = [lines1(:,3)' ; lines1(:,5)'];
             
             plot(x, y);
             hold off;

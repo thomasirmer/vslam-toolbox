@@ -1,4 +1,3 @@
-
 /*
  * PairwiseLineMatching.hh
  *
@@ -9,8 +8,10 @@
 #ifndef PAIRWISELINEMATCHING_HH_
 #define PAIRWISELINEMATCHING_HH_
 #include <map>
+//#include <Base/Math/Matrix.hh>
+//#include <Eigen/SuperLUSupport>
 #include "LineDescriptor.hpp"
-
+#include "redsvd\RedSVD.h"
 
 //each node in the graph is a possible line matching pair in the left and right image
 struct Node{
@@ -37,9 +38,13 @@ class PairwiseLineMatching
 public:
     PairwiseLineMatching(){};
     void LineMatching(ScaleLines &linesInLeft,ScaleLines &linesInRight,
-    		std::vector<unsigned int> &matchResult);
+		std::vector<std::pair<unsigned int, unsigned int>> &matchResult);
+	void LineMatching(ScaleLines &linesInLeft, ScaleLines &linesInRight,
+		std::vector<cv::DMatch> &matchResult);
+
 
 private:
+	void reduceNlongestLines(ScaleLines &linesinLeft, ScaleLines &linesInRight, int n=20);
     /* Compute the approximate global rotation angle between image pair(i.e. the left and right images).
    * As shown in Bin Fan's work "Robust line matching through line-point invariants", this approximate
    * global rotation angle can greatly prune the spurious line correspondences. This is the idea of their
@@ -62,7 +67,7 @@ private:
     /* Get the final matching from the principal eigenvector.
     */
     void MatchingResultFromPrincipalEigenvector_(ScaleLines &linesInLeft,ScaleLines &linesInRight,
-    		std::vector<unsigned int > &matchResult);
+		std::vector<std::pair<unsigned int, unsigned int> > &matchResult);
     double globalRotationAngle_;//the approximate global rotation angle between image pairs
 
     /*construct a map to store the principal eigenvector and its index.
@@ -71,7 +76,8 @@ private:
      *This is because the map need be sorted by the eigenvalue rather than index
      *for our purpose.
       */
-    EigenMAP eigenMap_;
+    //EigenMAP eigenMap_;
+	std::list<std::pair<double, int>> sorted_list;
     Nodes_list nodesList_;//save all the possible matched line pairs
     double minOfEigenVec_;//the acceptable minimal value in the principal eigen vector;
 };

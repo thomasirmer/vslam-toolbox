@@ -78,8 +78,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\EDLinesExtractor\EDLineDetector.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\LineDescriptor.cpp" />
-    <ClCompile Include="..\..\..\EDLinesExtractor\mFiles\EDLinesExtractor.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\updateFrame_c.cpp" />
