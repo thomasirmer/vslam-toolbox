@@ -1,0 +1,10 @@
+function [ ] = rename( path, ext )
+    
+    path = sprintf('%s%s%s', '');
+
+    files = dir(['./' path '/*.' ext]);
+    
+    for file = files'
+        movefile(['./' path '/' file.name], ['./' path '/' ]);
+    end
+end

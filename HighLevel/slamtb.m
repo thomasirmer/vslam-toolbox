@@ -118,12 +118,12 @@ for rob = [Rob.rob]
         % TODO: Get line features for 'Raw(sen).data.segments.coord' from
         % image with EDLinesExtractor!
         if (currentFrame < Tim.lastFrame)
-            imagePath1 = sprintf('./Datasets/shoe/shoe_%03d.jpg', currentFrame);
-            imagePath2 = sprintf('./Datasets/shoe/shoe_%03d.jpg', currentFrame + 1);
+            imagePath1 = sprintf('./Datasets/goose1/%03d.jpg', currentFrame);
+            imagePath2 = sprintf('./Datasets/goose2/%03d.jpg', currentFrame + 1);
             image1 = mat2gray(rgb2gray(imread(imagePath1)));
             Raw(sen).data.img = mat2gray(rgb2gray(imread(imagePath2)));
-            [lines1, lines2] = EDLinesExtractor(image1, Raw(sen).data.img);
-            
+            [lines1, lines2, matching] = EDLinesExtractor(image1, Raw(sen).data.img);
+                
             % ---- BEGIN DEBUG ----
             hFigure;
             imshow(image1);

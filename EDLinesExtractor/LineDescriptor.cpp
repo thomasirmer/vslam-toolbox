@@ -140,7 +140,7 @@ LineDescriptor::~LineDescriptor(){
 /*Line detection method: element in keyLines[i] includes a set of lines which is the same line
  * detected in different octave images.
  */
-int LineDescriptor::OctaveKeyLines(cv::Mat & image, ScaleLines &keyLines)
+int LineDescriptor::OctaveKeyLines(cv::Mat & image, ScaleLines & keyLines)
 {
 	unsigned int numOfFinalLine = 0;
 	
@@ -647,7 +647,7 @@ int LineDescriptor::GetLineDescriptor(cv::Mat & image, ScaleLines & keyLines)
         return -1;
     }
     t = ((double)cv::getTickCount() - t)/cv::getTickFrequency();
-    std::cout<<"time line extraction: "<<t<<"s"<<std::endl;
+    //std::cout<<"time line extraction: "<<t<<"s"<<std::endl;
     
 //    t = (double)cv::getTickCount();
 //    ComputeLBD_(keyLines);

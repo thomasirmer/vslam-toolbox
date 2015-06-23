@@ -214,7 +214,7 @@ int EDLineDetector::EdgeDrawing(cv::Mat &image, EdgeChains &edgeChains, bool smo
 	cv::compare(dxABS_m, dyABS_m, dirImg_, cv::CMP_LT);
 
 	t = ((double)cv::getTickCount() - t)/cv::getTickFrequency();
-	std::cout<<"FOR ABS: "<<t<<"s"<<std::endl;
+	//std::cout<<"FOR ABS: "<<t<<"s"<<std::endl;
 	
 	short *pdxImg = dxImg_.ptr<short>();
 	short *pdyImg = dyImg_.ptr<short>();
