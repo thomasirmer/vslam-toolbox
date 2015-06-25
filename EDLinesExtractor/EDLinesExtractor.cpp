@@ -78,8 +78,8 @@ void mexFunction(int nlhs, mxArray *plhs[],
 		matchingResultsOutput.at<double>(i, 0) = (double) i;
 		matchingResultsOutput.at<double>(i, 1) = (double) matchResult.at(i).distance;
 		matchingResultsOutput.at<double>(i, 2) = (double) matchResult.at(i).imgIdx;
-		matchingResultsOutput.at<double>(i, 3) = (double) matchResult.at(i).queryIdx;
-		matchingResultsOutput.at<double>(i, 4) = (double) matchResult.at(i).trainIdx;
+		matchingResultsOutput.at<double>(i, 3) = (double) matchResult.at(i).trainIdx;
+		matchingResultsOutput.at<double>(i, 4) = (double) matchResult.at(i).queryIdx;
 	}
 
 	// ----- OUTPUT -----
