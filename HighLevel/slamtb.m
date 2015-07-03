@@ -99,7 +99,7 @@ for currentFrame = Tim.firstFrame : Tim.lastFrame
 % 
 %     end % end process robots
 
-%coordsXY = load('points.dat');
+% coordsXY = load('points.dat');
 for rob = [Rob.rob]
     for sen = Rob(rob).sensors
         Raw(sen).type = 'image';
@@ -119,21 +119,35 @@ for rob = [Rob.rob]
         % image with EDLinesExtractor!
         if (currentFrame < Tim.lastFrame)
             imagePath1 = sprintf('./Datasets/goose1/%03d.jpg', currentFrame);
-            imagePath2 = sprintf('./Datasets/goose2/%03d.jpg', currentFrame + 1);
-            image1 = mat2gray(rgb2gray(imread(imagePath1)));
-            Raw(sen).data.img = mat2gray(rgb2gray(imread(imagePath2)));
-            [lines1, lines2, matching] = EDLinesExtractor(image1, Raw(sen).data.img);
-                
+            imagePath2 = sprintf('./Datasets/goose1/%03d.jpg', currentFrame + 1);
+            imageLeft = mat2gray(rgb2gray(imread(imagePath1)));
+            imageRight = mat2gray(rgb2gray(imread(imagePath2)));
+            [linesLeft, linesRight, matching] = EDLinesExtractor(imageLeft, imageRight);
+            
+            Raw(sen).data.segments.coord = [linesLeft(matching(:,4)+1,2)' ; linesLeft(matching(:,4)+1,4)' ; linesLeft(matching(:,4)+1,3)' ; linesLeft(matching(:,4)+1,5)'];
+            Raw(sen).data.segments.app = matching(:,4);
             % ---- BEGIN DEBUG ----
-            hFigure;
-            imshow(image1);
-            hold on;
+%             hFigure;
+%             imshow(imageLeft);
+%             hold on;
             
-            x = [lines1(:,2)' ; lines1(:,4)'];
-            y = [lines1(:,3)' ; lines1(:,5)'];
+            % plot all lines
+%             x1 = [linesLeft(:,2)' ; linesLeft(:,4)'];
+%             y1 = [linesLeft(:,3)' ; linesLeft(:,5)'];
+%             
+%             x2 = [linesRight(:,2)' ; linesRight(:,4)'];
+%             y2 = [linesRight(:,3)' ; linesRight(:,5)'];
             
-            plot(x, y);
-            hold off;
+            % plot matching lines
+%             x1 = [linesLeft(matching(:,4)+1,2)' ; linesLeft(matching(:,4)+1,4)'];
+%             y1 = [linesLeft(matching(:,4)+1,3)' ; linesLeft(matching(:,4)+1,5)'];
+%             
+%             x2 = [linesRight(matching(:,5)+1,2)' ; linesRight(matching(:,5)+1,4)'];
+%             y2 = [linesRight(matching(:,5)+1,3)' ; linesRight(matching(:,5)+1,5)'];
+%             
+%             plot(x1, y1, 'r');
+%             plot(x2, y2, 'b');
+%             hold off;
             % ----- END DEBUG -----
         end
         

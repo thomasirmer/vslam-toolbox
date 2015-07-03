@@ -16,6 +16,9 @@
     <Filter Include="Quelldateien\EDLineDetector">
       <UniqueIdentifier>{93bd9a4b-7963-44e0-bf10-2b3f4c0df185}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\EDLineDetector\RedSVD">
+      <UniqueIdentifier>{55f3848d-4058-4ccc-9715-d277be0c6a73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Points\fromFrame_c.cpp">
@@ -100,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.hpp">
       <Filter>Quelldateien\EDLineDetector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\EDLinesExtractor\redsvd\RedSVD.h">
+      <Filter>Quelldateien\EDLineDetector\RedSVD</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

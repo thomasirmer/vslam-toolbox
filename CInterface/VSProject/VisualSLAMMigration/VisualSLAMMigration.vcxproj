@@ -98,6 +98,7 @@
     <ClInclude Include="..\..\..\EDLinesExtractor\LineDescriptor.hpp" />
     <ClInclude Include="..\..\..\EDLinesExtractor\LineStructure.hpp" />
     <ClInclude Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.hpp" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\redsvd\RedSVD.h" />
     <ClInclude Include="..\..\..\FrameTransforms\frame_c.hpp" />
     <ClInclude Include="..\..\..\FrameTransforms\Rotations\pi2pc_c.hpp" />
     <ClInclude Include="..\..\..\FrameTransforms\Rotations\q2pi_c.hpp" />
