@@ -63,6 +63,12 @@
     <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor.cpp">
       <Filter>Quelldateien\EDLineDetector</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\HighLevel\persistenceTest.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor_Persistence.cpp">
+      <Filter>Quelldateien\EDLineDetector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\DataTypeParsing.hpp">

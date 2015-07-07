@@ -79,10 +79,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\EDLinesExtractor\EDLineDetector.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor_Persistence.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\LineDescriptor.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\updateFrame_c.cpp" />
+    <ClCompile Include="..\..\..\HighLevel\persistenceTest.cpp" />
     <ClCompile Include="..\..\..\HighLevel\userDataLin.cpp" />
     <ClCompile Include="..\..\..\Math\normvec_c.cpp" />
     <ClCompile Include="..\..\..\Points\fromFrame_c.cpp" />

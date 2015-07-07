@@ -99,7 +99,7 @@ for currentFrame = Tim.firstFrame : Tim.lastFrame
 % 
 %     end % end process robots
 
-% coordsXY = load('points.dat');
+coordsXY = load('points.dat');
 for rob = [Rob.rob]
     for sen = Rob(rob).sensors
         Raw(sen).type = 'image';
@@ -117,36 +117,51 @@ for rob = [Rob.rob]
         % -----------------------------------------------------------------
         % TODO: Get line features for 'Raw(sen).data.segments.coord' from
         % image with EDLinesExtractor!
-        if (currentFrame < Tim.lastFrame)
-            imagePath1 = sprintf('./Datasets/goose1/%03d.jpg', currentFrame);
-            imagePath2 = sprintf('./Datasets/goose1/%03d.jpg', currentFrame + 1);
-            imageLeft = mat2gray(rgb2gray(imread(imagePath1)));
-            imageRight = mat2gray(rgb2gray(imread(imagePath2)));
+        if (currentFrame < Tim.lastFrame)           
+            imagePath1 = sprintf('./Datasets/corridor/%03d.png', currentFrame);
+            imagePath2 = sprintf('./Datasets/corridor/%03d.png', currentFrame + 1);
+%             imageLeft = mat2gray(rgb2gray(imread(imagePath1)));
+%             imageRight = mat2gray(rgb2gray(imread(imagePath2)));
+            imageLeft = mat2gray(imread(imagePath1));
+            imageRight = mat2gray(imread(imagePath2));
             [linesLeft, linesRight, matching] = EDLinesExtractor(imageLeft, imageRight);
             
             Raw(sen).data.segments.coord = [linesLeft(matching(:,4)+1,2)' ; linesLeft(matching(:,4)+1,4)' ; linesLeft(matching(:,4)+1,3)' ; linesLeft(matching(:,4)+1,5)'];
             Raw(sen).data.segments.app = matching(:,4);
+
             % ---- BEGIN DEBUG ----
+            
+            persistenceTest();
+            
+            % ---- plot coordsXY for test purposes
 %             hFigure;
-%             imshow(imageLeft);
-%             hold on;
+%             lines = coordsXY(coordsXY(:,1) == currentFrame, 3:6);
+%             x = [lines(:,1)' ; lines(:,3)'];
+%             y = [lines(:,2)' ; lines(:,4)'];
+%             plot(x,y);
+%             axis([min(coordsXY(:,3)) max(coordsXY(:,5)) min(coordsXY(:,4)) max(coordsXY(:,6))]);
+%             pause(0.125);
+
+            hFigure;
+            imshow(imageLeft);
+            hold on;
             
-            % plot all lines
-%             x1 = [linesLeft(:,2)' ; linesLeft(:,4)'];
-%             y1 = [linesLeft(:,3)' ; linesLeft(:,5)'];
-%             
-%             x2 = [linesRight(:,2)' ; linesRight(:,4)'];
-%             y2 = [linesRight(:,3)' ; linesRight(:,5)'];
+            % ---- plot all lines
+            x1 = [linesLeft(:,2)' ; linesLeft(:,4)'];
+            y1 = [linesLeft(:,3)' ; linesLeft(:,5)'];
             
-            % plot matching lines
+            x2 = [linesRight(:,2)' ; linesRight(:,4)'];
+            y2 = [linesRight(:,3)' ; linesRight(:,5)'];
+            
+            % ---- plot matching lines
 %             x1 = [linesLeft(matching(:,4)+1,2)' ; linesLeft(matching(:,4)+1,4)'];
 %             y1 = [linesLeft(matching(:,4)+1,3)' ; linesLeft(matching(:,4)+1,5)'];
 %             
 %             x2 = [linesRight(matching(:,5)+1,2)' ; linesRight(matching(:,5)+1,4)'];
 %             y2 = [linesRight(matching(:,5)+1,3)' ; linesRight(matching(:,5)+1,5)'];
 %             
-%             plot(x1, y1, 'r');
-%             plot(x2, y2, 'b');
+            plot(x1, y1, 'r');
+            plot(x2, y2, 'b');
 %             hold off;
             % ----- END DEBUG -----
         end
