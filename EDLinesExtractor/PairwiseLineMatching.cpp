@@ -9,7 +9,7 @@
 
 #include "PairwiseLineMatching.hpp"
 
-#include <opencv2\core\core.hpp>
+#include <opencv2/core/core.hpp>
 #include <opencv2/core/eigen.hpp>
 
 // -- FIXES --

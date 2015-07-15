@@ -11,7 +11,7 @@
 //#include <Base/Math/Matrix.hh>
 //#include <Eigen/SuperLUSupport>
 #include "LineDescriptor.hpp"
-#include "redsvd\RedSVD.h"
+#include "redsvd/RedSVD.h"
 
 //each node in the graph is a possible line matching pair in the left and right image
 struct Node{

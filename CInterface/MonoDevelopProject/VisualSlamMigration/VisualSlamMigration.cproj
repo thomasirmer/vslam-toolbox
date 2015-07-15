@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F18B6AB2-3E21-4D8E-BB67-B53AB6026086}</ProjectGuid>
+    <Target>Bin</Target>
+    <Language>CPP</Language>
+    <Compiler>
+      <Compiler ctype="GppCompiler" />
+    </Compiler>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineSymbols>DEBUG MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+    <OutputName>VisualSlamMigration</OutputName>
+    <CompileTarget>Bin</CompileTarget>
+    <Includes>
+      <Includes>
+        <Include>/Users/thomasirmer/Documents/Development/git/slamtoolbox/CInterface</Include>
+        <Include>/Users/thomasirmer/Documents/Development/git/slamtoolbox/EDLinesExtractor</Include>
+        <Include>/Users/thomasirmer/Documents/MATLAB/SupportPackages/R2015a/opencvinterface/toolbox/vision/supportpackages/visionopencv/opencv/include</Include>
+        <Include>/Applications/MATLAB_R2015a.app/extern/include</Include>
+      </Includes>
+    </Includes>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <DefineSymbols>MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+    <OptimizationLevel>3</OptimizationLevel>
+    <OutputName>VisualSlamMigration</OutputName>
+    <CompileTarget>Bin</CompileTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\EDLinesExtractor\EDLineDetector.cpp" />
+    <Compile Include="..\..\..\EDLinesExtractor\EDLinesExtractor_Persistence.cpp" />
+    <Compile Include="..\..\..\EDLinesExtractor\EDLinesExtractor.cpp" />
+    <Compile Include="..\..\..\EDLinesExtractor\LineDescriptor.cpp" />
+    <Compile Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.cpp" />
+    <Compile Include="..\..\..\HighLevel\persistenceTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\EDLinesExtractor\EDLineDetector.hpp" />
+    <None Include="..\..\..\EDLinesExtractor\LineDescriptor.hpp" />
+    <None Include="..\..\..\EDLinesExtractor\LineStructure.hpp" />
+    <None Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.hpp" />
+  </ItemGroup>
+</Project>

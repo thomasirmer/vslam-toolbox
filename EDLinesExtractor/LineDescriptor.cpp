@@ -50,10 +50,12 @@ the use of this software, even if advised of the possibility of such damage.
     #define M_PI 3.14159265358979323846
 #endif
 
+#ifdef _WIN32 || _WIN64
 int round(double toRound) {
 	toRound += 0.5f;
 	return floor(toRound);
 }
+#endif
 // -- FIXES --
 
 using namespace std;

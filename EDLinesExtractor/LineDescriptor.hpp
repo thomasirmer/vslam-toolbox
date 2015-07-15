@@ -43,6 +43,14 @@ the use of this software, even if advised of the possibility of such damage.
 #include "EDLineDetector.hpp"
 #include "LineStructure.hpp"
 
+#ifdef __APPLE__
+#define DLL_EXPORT
+#endif
+
+#ifdef _WIN32 || _WIN64
+#define DLL_EXPORT __declspec( dllexport )
+#endif
+
 
 #include <map>
 struct OctaveLine{
@@ -57,20 +65,20 @@ struct OctaveLine{
 class LineDescriptor
 {
 public:
-	__declspec( dllexport ) LineDescriptor();
-	__declspec( dllexport ) LineDescriptor(unsigned int numOfBand, unsigned int widthOfBand);
-	__declspec( dllexport ) ~LineDescriptor();
+	DLL_EXPORT LineDescriptor();
+	DLL_EXPORT LineDescriptor(unsigned int numOfBand, unsigned int widthOfBand);
+	DLL_EXPORT ~LineDescriptor();
 	enum{
 		NearestNeighbor=0, //the nearest neighbor is taken as matching
 		NNDR=1//nearest/next ratio
 	};
 	/*This function is used to detect lines from multi-scale images.*/
-	__declspec( dllexport ) int OctaveKeyLines(cv::Mat & image, ScaleLines &keyLines);
-	__declspec( dllexport ) int GetLineDescriptor(cv::Mat & image,
+	DLL_EXPORT int OctaveKeyLines(cv::Mat & image, ScaleLines &keyLines);
+	DLL_EXPORT int GetLineDescriptor(cv::Mat & image,
 		ScaleLines &keyLines);
-	__declspec( dllexport ) int MatchLineByDescriptor(ScaleLines &keyLinesLeft, ScaleLines &keyLinesRight,
+	DLL_EXPORT int MatchLineByDescriptor(ScaleLines &keyLinesLeft, ScaleLines &keyLinesRight,
 		std::vector<short> &matchLeft, std::vector<short> &matchRight,
-		__declspec( dllexport ) int criteria=NNDR);
+		DLL_EXPORT int criteria=NNDR);
 	float LowestThreshold;//global threshold for line descriptor distance, default is 0.35
 	float NNDRThreshold;//the NNDR threshold for line descriptor distance, default is 0.6
 private:
