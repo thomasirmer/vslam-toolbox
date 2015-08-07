@@ -1,1 +1,1 @@
-mexOpenCV -g 'EDLinesExtractor_Persistence.cpp' 'EDLineDetector.cpp' 'LineDescriptor.cpp' 'PairwiseLineMatching.cpp'
+mexOpenCV -g 'EDLinesExtractor.cpp' 'EDLineDetector.cpp' 'LineDescriptor.cpp' 'PairwiseLineMatching.cpp'

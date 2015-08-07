@@ -12,47 +12,50 @@
 
 using namespace cv;
 
-bool myCompare(LinesVec line1, LinesVec line2) {
+bool compareLength(LinesVec line1, LinesVec line2) {
 	return (line1[0].lineLength > line2[0].lineLength);
 }
 
 void mexFunction(int nlhs, mxArray *plhs[],
 				 int nrhs, const mxArray *prhs[])
 {
-	// ----- INPUT -----
+	// ----- read images from matlab ---------------------------------------------
 	Mat imageLeft = getImageFromMxArray(prhs[0], CV_8UC1);
 	Mat imageRight = getImageFromMxArray(prhs[1], CV_8UC1);
+	// ---------------------------------------------------------------------------
 
-	// ----- FUNCTION START -----
+	// ----- detect lines --------------------------------------------------------
 	LineDescriptor lineDesc;
 	ScaleLines linesLeft;
 	ScaleLines linesRight;
 	lineDesc.GetLineDescriptor(imageLeft, linesLeft);
 	lineDesc.GetLineDescriptor(imageRight, linesRight);
+	// ---------------------------------------------------------------------------
 
-	// ----- DEBUG -----
-	// take only the n longest lines for performance reasons
-	int n = 16;
-
+	// ----- take only the longest lines for performance reasons -----------------
 	// sort lines descending based on length
-	std::sort(linesLeft.begin(), linesLeft.end(), myCompare);
-	std::sort(linesRight.begin(), linesRight.end(), myCompare);
+	std::sort(linesLeft.begin(), linesLeft.end(), compareLength);
+	std::sort(linesRight.begin(), linesRight.end(), compareLength);
 
+	// put n longest lines into new data structure
+	int n = 20;
 	ScaleLines linesLeftLongest;
 	ScaleLines linesRightLongest;
 	linesLeftLongest.resize(n);
 	linesRightLongest.resize(n);
-
 	for (int i = 0; i < n; i++) {
 		linesLeftLongest[i].push_back(linesLeft[i][0]);
 		linesRightLongest[i].push_back(linesRight[i][0]);
 	}
-	// ----- DEBUG -----
-
+	// ---------------------------------------------------------------------------
+	
+	// ----- match lines ---------------------------------------------------------
 	PairwiseLineMatching lineMatch;
 	std::vector<DMatch> matchResult;
 	lineMatch.LineMatching(linesLeftLongest, linesRightLongest, matchResult);
+	// ---------------------------------------------------------------------------
 
+	// ----- load lines into output structure ------------------------------------
 	Mat linesOutputLeft(linesLeftLongest.size(), 6, CV_64FC1);
 	for (int i = 0; i < linesLeftLongest.size(); i++) {
 		linesOutputLeft.at<double>(i, 0) = (double) i;
@@ -81,8 +84,9 @@ void mexFunction(int nlhs, mxArray *plhs[],
 		matchingResultsOutput.at<double>(i, 3) = (double) matchResult.at(i).trainIdx;
 		matchingResultsOutput.at<double>(i, 4) = (double) matchResult.at(i).queryIdx;
 	}
+	// ---------------------------------------------------------------------------
 
-	// ----- OUTPUT -----
+	// ----- output to matlab ----------------------------------------------------
 	double *data_out;
 
 	plhs[0] = mxCreateDoubleMatrix(linesOutputLeft.rows, linesOutputLeft.cols, mxREAL);
@@ -96,4 +100,5 @@ void mexFunction(int nlhs, mxArray *plhs[],
 	plhs[2] = mxCreateDoubleMatrix(matchingResultsOutput.rows, matchingResultsOutput.cols, mxREAL);
 	data_out = (double *) mxGetData(plhs[2]);
 	openCVMat2MatlabMat(matchingResultsOutput, data_out);
+	// ---------------------------------------------------------------------------
 }

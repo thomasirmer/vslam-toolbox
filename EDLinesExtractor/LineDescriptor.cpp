@@ -51,10 +51,10 @@ the use of this software, even if advised of the possibility of such damage.
 #endif
 
 #ifdef _WIN32 || _WIN64
-//int round(double toround) {
-//	toround += 0.5f;
-//	return floor(toround);
-//}
+int round(double toround) {
+	toround += 0.5f;
+	return floor(toround);
+}
 #endif
 // -- FIXES --
 
