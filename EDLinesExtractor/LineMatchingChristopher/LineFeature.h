@@ -11,6 +11,7 @@ public:
 
 	int lastTrainIndex;
 	std::vector<std::pair<cv::Point2f, cv::Point2f>> points;
+
 	bool operator<(const LineFeature& rhs) const	{
 		if (endFrame == rhs.endFrame)
 			return lastTrainIndex<rhs.lastTrainIndex;

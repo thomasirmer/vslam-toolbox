@@ -10,6 +10,16 @@ using namespace cv;
 
 // MATLAB --> OPENCV
 
+void copyDataToMat(Mat &image, const mxArray* mxArrayData) {
+	double *data = (double*)mxGetData(mxArrayData);
+	size_t nRows = mxGetM(mxArrayData);
+	size_t nCols = mxGetN(mxArrayData);
+
+	for (int row = 0; row < nRows; row++)
+		for (int col = 0; col < nCols; col++)
+			image.at<unsigned char>(row, col) = (unsigned char)cvRound(data[col * nRows + row] * 255);
+}
+
 Mat matlabMat2OpenCVMat(double* data, size_t nRows, size_t nCols) {
     
     // create Mat object as double matrix with given rows and columns

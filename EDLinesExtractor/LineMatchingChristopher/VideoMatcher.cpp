@@ -3,7 +3,7 @@
 
 VideoMatcher::VideoMatcher(const std::string &prefix, const std::string &dir, const std::string &suffix, const int startFrame, const int endFrame, const double &factor, const int octaves, const std::string &file_cnt, const cv::Mat &calib, const cv::Mat &distCoeffs)
 	: prefix(prefix), dir(dir), file_cnt(file_cnt), suffix(suffix), startFrame(startFrame), endFrame(endFrame), calib(calib), distCoeffs(distCoeffs), mustInitUndistort(true),
-	lineDesc(octaves), factor(factor)
+	 factor(factor)
 {
 
 

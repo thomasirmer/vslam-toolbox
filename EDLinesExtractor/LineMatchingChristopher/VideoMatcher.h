@@ -1,6 +1,6 @@
 #pragma once
-#include "../EDLines/PairwiseLineMatching.hh"
-#include "../EDLines/LineFeature.h"
+#include "../PairwiseLineMatching.hpp"
+#include "LineFeature.h"
 #include <set>
 #include "Reader.h"
 

@@ -20,49 +20,33 @@ void onExit();
 static mxArray *addrImage1;
 static mxArray *addrImage2;
 
+Mat *image1 = NULL;
+
 // ----- MEX INTERFACE FUNCTION -----
 void mexFunction(int nlhs, mxArray *plhs[],
 				 int nrhs, const mxArray *prhs[])
 {
+	mexPrintf("set callback\n");
+	mexAtExit(onExit);
 
-	mexPrintf("");
-	
-	return;
-	
-	
-	/*
+	mexPrintf("get size\n");
+	mwSize nBytes = sizeof(Mat);
+	mexPrintf("size is %d bytes\n", nBytes);
 
-	Mat image1;
-	Mat image2;
+	mexPrintf("allocate memory\n");
+	image1 = (Mat*)mxMalloc(nBytes);
 
-	if (image1.empty() && image2.empty()) // first call
+	if (image1->empty()) // first call
 	{
-		mexPrintf("first call!");
-		
-		image1 = getImageFromMxArray(prhs[0], CV_8UC1);
-		
-		mexMakeMemoryPersistent(&image1);
-		
-	} 
-	else if (image2.empty()) // second call
-	{
-		mexPrintf("second call!");
-		
-		image2 = getImageFromMxArray(prhs[0], CV_8UC1);
-		mexMakeMemoryPersistent(&image1);
-		
+		mexPrintf("copy data\n");
+		copyDataToMat(*image1, prhs[0]);
+		mexPrintf("memory persistence\n");
+		mexMakeMemoryPersistent(image1);
 	}
-	else // all other calls
+	else
 	{
-		mexPrintf("another call!");
-		
-		image1 = image2;
-		image2 = getImageFromMxArray(prhs[0], CV_8UC1);
-		
+		mexPrintf("another call\n");
 	}
-	
-	*/
-
 }
 
 // ----- FUNCTION DEFINITIONS -----
@@ -72,5 +56,9 @@ bool myCompare(LinesVec line1, LinesVec line2) {
 
 void onExit() 
 {
-
+	mexPrintf("onExit\n");
+	if (image1 != NULL) {
+		mexPrintf("delete memory\n");
+		delete image1;
+	}
 }

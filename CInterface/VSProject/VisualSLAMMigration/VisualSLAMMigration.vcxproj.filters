@@ -19,6 +19,9 @@
     <Filter Include="Quelldateien\EDLineDetector\RedSVD">
       <UniqueIdentifier>{55f3848d-4058-4ccc-9715-d277be0c6a73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\EDLineDetector\LineMatchingChristopher">
+      <UniqueIdentifier>{333161a3-ddb3-45c2-ac65-ca39f31157f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Points\fromFrame_c.cpp">
@@ -69,6 +72,15 @@
     <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor_Persistence.cpp">
       <Filter>Quelldateien\EDLineDetector</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\LineFeature.cpp">
+      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Reader.cpp">
+      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\VideoMatcher.cpp">
+      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\DataTypeParsing.hpp">
@@ -112,6 +124,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\EDLinesExtractor\redsvd\RedSVD.h">
       <Filter>Quelldateien\EDLineDetector\RedSVD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\LineFeature.h">
+      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Reader.h">
+      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Split.h">
+      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\VideoMatcher.h">
+      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

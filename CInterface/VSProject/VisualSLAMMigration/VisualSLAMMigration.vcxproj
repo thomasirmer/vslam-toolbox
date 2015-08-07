@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,13 +19,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -52,7 +52,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\MATLAB\R2014b\extern\include;C:\MATLAB\SupportPackages\R2014b\opencvinterface\toolbox\vision\supportpackages\visionopencv\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\MATLAB\R2015a\extern\include;C:\Program Files\MATLAB\R2014b\extern\include;C:\MATLAB\SupportPackages\R2015a\opencvinterface\toolbox\vision\supportpackages\visionopencv\opencv\include;C:\MATLAB\SupportPackages\R2014b\opencvinterface\toolbox\vision\supportpackages\visionopencv\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -81,6 +81,9 @@
     <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor_Persistence.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\LineDescriptor.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\LineFeature.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Reader.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\VideoMatcher.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\updateFrame_c.cpp" />
@@ -98,6 +101,10 @@
     <ClInclude Include="..\..\..\DataManagement\split_c.hpp" />
     <ClInclude Include="..\..\..\EDLinesExtractor\EDLineDetector.hpp" />
     <ClInclude Include="..\..\..\EDLinesExtractor\LineDescriptor.hpp" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\LineFeature.h" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Reader.h" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Split.h" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\VideoMatcher.h" />
     <ClInclude Include="..\..\..\EDLinesExtractor\LineStructure.hpp" />
     <ClInclude Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.hpp" />
     <ClInclude Include="..\..\..\EDLinesExtractor\redsvd\RedSVD.h" />
