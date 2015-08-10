@@ -1,0 +1,1 @@
+mexOpenCV 'updateFrame_c.cpp';

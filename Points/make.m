@@ -1,0 +1,1 @@
+mexOpenCV 'fromFrame_c.cpp';

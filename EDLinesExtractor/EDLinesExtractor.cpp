@@ -9,8 +9,10 @@
 
 #include "LineDescriptor.hpp"
 #include "PairwiseLineMatching.hpp"
+#include "LineMatchingChristopher\LineFeature.h"
 
 using namespace cv;
+using namespace std;
 
 bool compareLength(LinesVec line1, LinesVec line2) {
 	return (line1[0].lineLength > line2[0].lineLength);
@@ -48,10 +50,10 @@ void mexFunction(int nlhs, mxArray *plhs[],
 		linesRightLongest[i].push_back(linesRight[i][0]);
 	}
 	// ---------------------------------------------------------------------------
-	
+
 	// ----- match lines ---------------------------------------------------------
 	PairwiseLineMatching lineMatch;
-	std::vector<DMatch> matchResult;
+	std::vector<pair<unsigned int, unsigned int>> matchResult;
 	lineMatch.LineMatching(linesLeftLongest, linesRightLongest, matchResult);
 	// ---------------------------------------------------------------------------
 
@@ -76,14 +78,21 @@ void mexFunction(int nlhs, mxArray *plhs[],
 		linesOutputRight.at<double>(i, 5) = (double) linesRightLongest[i][0].lineLength;
 	}
 
-	Mat matchingResultsOutput(matchResult.size(), 5, CV_64FC1);
+	Mat matchingResultsOutput(matchResult.size(), 3, CV_64FC1);
+	for (int i = 0; i < matchResult.size(); i++) {
+		matchingResultsOutput.at<double>(i, 0) = (double)i;
+		matchingResultsOutput.at<double>(i, 1) = (double)matchResult.at(i).first;
+		matchingResultsOutput.at<double>(i, 2) = (double)matchResult.at(i).second;
+	}
+
+	/*Mat matchingResultsOutput(matchResult.size(), 5, CV_64FC1);
 	for (int i = 0; i < matchResult.size(); i++) {
 		matchingResultsOutput.at<double>(i, 0) = (double) i;
 		matchingResultsOutput.at<double>(i, 1) = (double) matchResult.at(i).distance;
 		matchingResultsOutput.at<double>(i, 2) = (double) matchResult.at(i).imgIdx;
 		matchingResultsOutput.at<double>(i, 3) = (double) matchResult.at(i).trainIdx;
 		matchingResultsOutput.at<double>(i, 4) = (double) matchResult.at(i).queryIdx;
-	}
+	}*/
 	// ---------------------------------------------------------------------------
 
 	// ----- output to matlab ----------------------------------------------------

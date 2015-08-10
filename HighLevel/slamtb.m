@@ -143,10 +143,10 @@ for rob = [Rob.rob]
             % ----- LINE MATCHING -----
             [linesLeft, linesRight, matching] = EDLinesExtractor(imageLeft, imageRight);
             
-            matching = sortrows(matching,5);
+            %matching = sortrows(matching,5);
             
-            Raw(sen).data.segments.coord = [linesLeft(matching(:,4)+1,2)' ; linesLeft(matching(:,4)+1,4)' ; linesLeft(matching(:,4)+1,3)' ; linesLeft(matching(:,4)+1,5)'];
-            Raw(sen).data.segments.app = matching(:,4)';
+            Raw(sen).data.segments.coord = [linesLeft(matching(:,2)+1,2)' ; linesLeft(matching(:,2)+1,4)' ; linesLeft(matching(:,2)+1,3)' ; linesLeft(matching(:,2)+1,5)'];
+            Raw(sen).data.segments.app = matching(:,2)';
 
             % ---- BEGIN DEBUG ----            
             % ---- plot coordsXY for test purposes
@@ -170,15 +170,21 @@ for rob = [Rob.rob]
 %             y2 = [linesRight(:,3)' ; linesRight(:,5)'];
             
             % ---- plot matching lines
-            x1 = [linesLeft(matching(:,4)+1,2)' ; linesLeft(matching(:,4)+1,4)'];
-            y1 = [linesLeft(matching(:,4)+1,3)' ; linesLeft(matching(:,4)+1,5)'];
+            x1 = [linesLeft(matching(:,2)+1,2)' ; linesLeft(matching(:,2)+1,4)'];
+            y1 = [linesLeft(matching(:,2)+1,3)' ; linesLeft(matching(:,2)+1,5)'];
             
-            x2 = [linesRight(matching(:,5)+1,2)' ; linesRight(matching(:,5)+1,4)'];
-            y2 = [linesRight(matching(:,5)+1,3)' ; linesRight(matching(:,5)+1,5)'];
+            x2 = [linesRight(matching(:,3)+1,2)' ; linesRight(matching(:,3)+1,4)'];
+            y2 = [linesRight(matching(:,3)+1,3)' ; linesRight(matching(:,3)+1,5)'];
             
-            plot(x1, y1, 'r');
-            plot(x2, y2, 'b');
+            for i = 1:length(x1)
+                line([x1(1,i), x1(2,i)], [y1(1,i), y1(2,i)], 'Color', 'red');
+                text((x1(1,i) + x1(2,i)) / 2, (y1(1,i) + y1(2,i)) / 2, num2str(matching(i,2)), 'Color', 'red');
+                line([x2(1,i), x2(2,i)], [y2(1,i), y2(2,i)], 'Color', 'blue');
+                text((x2(1,i) + x2(2,i)) / 2, (y2(1,i) + y2(2,i)) / 2, num2str(matching(i,3)), 'Color', 'blue');
+            end
             
+            legend('lines from left image', 'lines from right image');
+                        
             clear x1 y1 x2 y2;
             hold off;
             % ----- END DEBUG -----
