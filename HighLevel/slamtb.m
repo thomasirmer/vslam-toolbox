@@ -97,7 +97,7 @@ for currentFrame = Tim.firstFrame : Tim.lastFrame
 % 
 %     end % end process robots
 
-hFigure = figure;
+hFigureImage = figure;
 
 % coordsXY = load('points.dat');
 for rob = [Rob.rob]
@@ -119,8 +119,8 @@ for rob = [Rob.rob]
         
         if (currentFrame < Tim.lastFrame)       
             % ----- READ IMAGES -----
-            imagePath1 = sprintf('./Datasets/aerial/%03d.png', currentFrame);
-            imagePath2 = sprintf('./Datasets/aerial/%03d.png', currentFrame + 1);
+            imagePath1 = sprintf('./Datasets/corridor/%03d.png', currentFrame);
+            imagePath2 = sprintf('./Datasets/corridor/%03d.png', currentFrame + 1);
             image1 = imread(imagePath1);
             image2 = imread(imagePath2);
             
@@ -142,39 +142,50 @@ for rob = [Rob.rob]
             
             % ----- LINE MATCHING -----
             [linesLeft, linesRight, matching] = EDLinesExtractor(imageLeft, imageRight);
+            matching(:,:) = matching(:,:) + 1; % adjust indices for matlab
+            linesLeft(:,1) = linesLeft(:,1) + 1;
+            linesRight(:,1) = linesRight(:,1) + 1;
             
-            %matching = sortrows(matching,5);
+            % ----- FEATURE LIST -----
+            % ---- track matches over multiple images
+            if currentFrame == Tim.firstFrame % first images --> just take all matches
+                colIdx = 1;
+                features = [matching(:,1), matching(:, 3)];
+                colIdx = colIdx + 1;
+            else
+                % check if line has been matched before
+                [~,k] = ismember(matching(:,2), features(:, colIdx));
+                for i=1:length(k)
+                    if k(i) > 0 % line has been matched before --> continue line with original index
+                        features(k(i), colIdx + 1) = matching(i,3);
+                    else % line has NOT been matched before --> add with new index
+                        lastIdx = features(end, 1);
+                        features(lastIdx + 1, 1) = lastIdx + 1;
+                        features(lastIdx + 1, colIdx + 1) = matching(i,3);
+                    end
+                end
+                colIdx = colIdx + 1; 
+            end
             
-            Raw(sen).data.segments.coord = [linesLeft(matching(:,2)+1,2)' ; linesLeft(matching(:,2)+1,4)' ; linesLeft(matching(:,2)+1,3)' ; linesLeft(matching(:,2)+1,5)'];
-            Raw(sen).data.segments.app = matching(:,2)';
+            % find all matching indices for the current image
+            idxMatches = features(:, colIdx) > 0;
+            Raw(sen).data.segments.app = features(idxMatches,1)';
+            
+            % find indices of lines that have been matched in this image
+            idxLines = features(idxMatches,colIdx);
+            Raw(sen).data.segments.coord = linesRight(idxLines, 2:5)';
 
-            % ---- BEGIN DEBUG ----            
-            % ---- plot coordsXY for test purposes
-%             hFigure;
-%             lines = coordsXY(coordsXY(:,1) == currentFrame, 3:6);
-%             x = [lines(:,1)' ; lines(:,3)'];
-%             y = [lines(:,2)' ; lines(:,4)'];
-%             plot(x,y);
-%             axis([min(coordsXY(:,3)) max(coordsXY(:,5)) min(coordsXY(:,4)) max(coordsXY(:,6))]);
-%             pause(0.125);
-
-            hFigure;
+            % ---- PLOTTING ----
+            hFigureImage;
             imshow(imageLeft);
             hold on;
-                        
-            % ---- plot all lines
-%             x1 = [linesLeft(:,2)' ; linesLeft(:,4)'];
-%             y1 = [linesLeft(:,3)' ; linesLeft(:,5)'];
-%             
-%             x2 = [linesRight(:,2)' ; linesRight(:,4)'];
-%             y2 = [linesRight(:,3)' ; linesRight(:,5)'];
-            
+           
             % ---- plot matching lines
-            x1 = [linesLeft(matching(:,2)+1,2)' ; linesLeft(matching(:,2)+1,4)'];
-            y1 = [linesLeft(matching(:,2)+1,3)' ; linesLeft(matching(:,2)+1,5)'];
+            x1 = [linesLeft(matching(:,2),2)' ; linesLeft(matching(:,2),4)'];
+            y1 = [linesLeft(matching(:,2),3)' ; linesLeft(matching(:,2),5)'];
             
-            x2 = [linesRight(matching(:,3)+1,2)' ; linesRight(matching(:,3)+1,4)'];
-            y2 = [linesRight(matching(:,3)+1,3)' ; linesRight(matching(:,3)+1,5)'];
+            x2 = [linesRight(matching(:,3),2)' ; linesRight(matching(:,3),4)'];
+            y2 = [linesRight(matching(:,3),3)' ; linesRight(matching(:,3),5)'];
             
             for i = 1:length(x1)
                 line([x1(1,i), x1(2,i)], [y1(1,i), y1(2,i)], 'Color', 'red');
@@ -187,11 +198,7 @@ for rob = [Rob.rob]
                         
             clear x1 y1 x2 y2;
             hold off;
-            % ----- END DEBUG -----
         end
-        
-        %[coord, app] = EDLinesExtractor(Raw(sen).data.img);
-        % -----------------------------------------------------------------
     end
 end
 
