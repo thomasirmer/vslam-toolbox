@@ -30,7 +30,7 @@ Time = struct(...
 %   - Simulation landmark sets, playground dimensions
 World = struct(...
   'points',           [],... % 3d point landmarks - see THICKCLOISTER. 
- 'segments',         []);%testCube(-2,-2,0));  % 3D segments - see HOUSE. 
+  'segments',         []);%testCube(-2,-2,0));  % 3D segments - see HOUSE. 
 %  'segments',         lineCloister(-6,6,-6,6,1,7));  % 3D segments - see HOUSE. 
     
 % Robot things with their controls
@@ -82,17 +82,17 @@ Sensor{1} = struct(...
   'type',               'pinHole',...   % type of sensor
   'robot',              1,...           % robot where it is mounted
   'position',           [0;0;0],...     % position in robot
-  'orientationDegrees', [0;0;0],...      % orientation in robot, roll pitch yaw
+  'orientationDegrees', [0;0;0],...     % orientation in robot, roll pitch yaw
   'positionStd',        [0;0;0],...     % position error std
   'orientationStd',     [0;0;0],...     % orient. error std
-  'imageSize',          [640;480],...   % image size
+  'imageSize',          [512;512],...   % image size
   'pixErrorStd',        1.0,...         % pixel error std
   'intrinsic',          [322;239;249;249],... % intrinsic params u0, v0, ax, ay
   'distortion',         [],...          % distortion params
-  'frameInMap',         true,...       % add sensor frame in slam map?
+  'frameInMap',         true,...        % add sensor frame in slam map?
   'imGrid',             struct(...      % grid for Active Search
-    'numCells',         [8;6],...         % number of H and V grid cells
-    'skipOuter',        false));           % skip outer cells for initialization?
+  'numCells',           [5;5],...       % number of H and V grid cells
+  'skipOuter',          false));        % skip outer cells for initialization?
 
 
 % Estimation options 
@@ -111,7 +111,7 @@ Opt = struct(...
       'extPolicy',    true,...       % line extending policy ?
       'extSwitch',    2)),...        % extension policy switch point in pixels
   'init',             struct(...    % Options for initialization
-    'nbrInits',       [8 0],...      % number of inits [firstFrame, otherFrames]
+    'nbrInits',       [15 0],...      % number of inits [firstFrame, otherFrames]
     'initType',       'idpLin',...   % Type of lmk to use for init
     'idpPnt',         struct(...     % options for lmk initialization
       'nonObsMean',   .1,...          % mean of non obs

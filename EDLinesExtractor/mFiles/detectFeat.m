@@ -1,4 +1,4 @@
-function [newId, app, meas, exp, inn] = detectFeat(lmkType, lmkIds, raw, pixCov, imSize)
+function [newId, app, meas, exp, inn] = detectFeat(lmkType, lmkIds, raw, Sen)
 
 % SIMDETECTFEAT  Detect a new feature in simulated raw data.
 %   [ID, M, E, I] = SIMDETECTFEAT(LTYPE, LIDS, RAW, PIXCOV, IMSIZE)
@@ -36,18 +36,16 @@ function [newId, app, meas, exp, inn] = detectFeat(lmkType, lmkIds, raw, pixCov,
 
 switch lmkType(4:6)
 
-    case 'Pnt'
-        [newId, meas, exp, inn] = simDetectPnt(lmkIds, raw, pixCov, imSize);
-        app    = newId;
-
     case 'Lin'
-        [newId, meas, exp, inn] = detectLin(lmkIds, raw, pixCov);
+        % --------------------------------------------------------
+        % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
+        [newId, meas, exp, inn] = detectLin(lmkIds, raw, Sen);
         app    = newId;
+        % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
+        % --------------------------------------------------------
         
     otherwise
-
         error('??? Unknown landmark type ''%s''.',lmkType)
-
 end
 
 

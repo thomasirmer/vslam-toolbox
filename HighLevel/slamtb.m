@@ -140,6 +140,8 @@ for rob = [Rob.rob]
                 imageRight = mat2gray(image2);
             end
             
+            Raw(sen).data.img = imageRight;
+            
             % ----- LINE MATCHING -----
             [linesLeft, linesRight, matching] = EDLinesExtractor(imageLeft, imageRight);
             matching(:,:) = matching(:,:) + 1; % adjust indices for matlab
@@ -176,28 +178,32 @@ for rob = [Rob.rob]
             Raw(sen).data.segments.coord = linesRight(idxLines, 2:5)';
 
             % ---- PLOTTING ----
-            hFigureImage;
-            imshow(imageLeft);
-            hold on;
-           
-            % ---- plot matching lines
-            x1 = [linesLeft(matching(:,2),2)' ; linesLeft(matching(:,2),4)'];
-            y1 = [linesLeft(matching(:,2),3)' ; linesLeft(matching(:,2),5)'];
+            doPlot = false;
             
-            x2 = [linesRight(matching(:,3),2)' ; linesRight(matching(:,3),4)'];
-            y2 = [linesRight(matching(:,3),3)' ; linesRight(matching(:,3),5)'];
-            
-            for i = 1:length(x1)
-                line([x1(1,i), x1(2,i)], [y1(1,i), y1(2,i)], 'Color', 'red');
-                text((x1(1,i) + x1(2,i)) / 2, (y1(1,i) + y1(2,i)) / 2, num2str(matching(i,2)), 'Color', 'red');
-                line([x2(1,i), x2(2,i)], [y2(1,i), y2(2,i)], 'Color', 'blue');
-                text((x2(1,i) + x2(2,i)) / 2, (y2(1,i) + y2(2,i)) / 2, num2str(matching(i,3)), 'Color', 'blue');
+            if (doPlot)
+                hFigureImage;
+                imshow(imageLeft);
+                hold on;
+                
+                % ---- plot matching lines
+                x1 = [linesLeft(matching(:,2),2)' ; linesLeft(matching(:,2),4)'];
+                y1 = [linesLeft(matching(:,2),3)' ; linesLeft(matching(:,2),5)'];
+                
+                x2 = [linesRight(matching(:,3),2)' ; linesRight(matching(:,3),4)'];
+                y2 = [linesRight(matching(:,3),3)' ; linesRight(matching(:,3),5)'];
+                
+                for i = 1:length(x1)
+                    line([x1(1,i), x1(2,i)], [y1(1,i), y1(2,i)], 'Color', 'red');
+                    text((x1(1,i) + x1(2,i)) / 2, (y1(1,i) + y1(2,i)) / 2, num2str(matching(i,2)), 'Color', 'red');
+                    line([x2(1,i), x2(2,i)], [y2(1,i), y2(2,i)], 'Color', 'blue');
+                    text((x2(1,i) + x2(2,i)) / 2, (y2(1,i) + y2(2,i)) / 2, num2str(matching(i,3)), 'Color', 'blue');
+                end
+                
+                legend('lines from left image', 'lines from right image');
+                
+                clear x1 y1 x2 y2;
+                hold off;
             end
-            
-            legend('lines from left image', 'lines from right image');
-                        
-            clear x1 y1 x2 y2;
-            hold off;
         end
     end
 end

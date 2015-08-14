@@ -15,6 +15,35 @@ function [Sen,Raw] = createSensors(Sensor)
 for sen = 1:numel(Sensor)
 
     Si = Sensor{sen}; % input sensor structure
+    
+    % --------------------------------------------------------
+    % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
+    
+    % define image grid
+    So.imGrid                  = Si.imGrid;
+    So.imGrid.imPatches        = cell(Si.imGrid.numCells(1), Si.imGrid.numCells(2));
+    So.imGrid.imPatchIndices   = cell(Si.imGrid.numCells(1), Si.imGrid.numCells(2));
+    
+    patchHeight  = ceil(Si.imageSize(1) / Si.imGrid.numCells(1));
+    patchWidth   = ceil(Si.imageSize(2) / Si.imGrid.numCells(2));
+    
+    for row = 1:Si.imGrid.numCells(1)
+        for col = 1:Si.imGrid.numCells(2)
+            
+            x1 = max((col-1) * patchWidth,  1);
+            x2 = min(x1 + patchWidth, Si.imageSize(2));
+            y1 = max((row-1) * patchHeight, 1);
+            y2 = min(y1 + patchHeight, Si.imageSize(1));
+            
+            So.imGrid.imPatchIndices{row, col} = struct('x1', x1, 'x2', x2, ...
+                'y1', y1, 'y2', y2);
+            
+            % So.imGrid.imPatches{row, col} = image(y1:y2, x1:x2);
+        end
+    end
+    
+    % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
+    % --------------------------------------------------------
 
     % identification
     So.sen   = sen;

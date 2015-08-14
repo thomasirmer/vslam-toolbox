@@ -69,16 +69,15 @@ switch Raw.type
             Sen.par.imSize);
 
     case 'image'
-        % NYI : Not Yet Implemented. Create detectFeat.m and call:
-        % [newId, app, meas, exp, inn] = detectFeat(...);
+        % --------------------------------------------------------
+        % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
         [newId, app, meas, exp, inn] = detectFeat(...
             Opt.init.initType,    ...
             [Lmk([Lmk.used]).id], ...
             Raw.data,             ...
-            Sen.par.pixCov,       ...
-            Sen.par.imSize);
-        %error('??? Raw type ''%s'' not yet implemented.', Raw.type);
-        
+            Sen);
+        % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
+        % --------------------------------------------------------
     otherwise
         error('??? Unknown raw type %s.', Raw.type);
 end
