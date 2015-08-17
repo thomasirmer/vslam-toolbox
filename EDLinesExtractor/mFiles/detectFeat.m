@@ -36,7 +36,7 @@ function [newId, app, meas, exp, inn] = detectFeat(lmkType, lmkIds, raw, Sen)
 
 switch lmkType(4:6)
 
-    case 'Lin'
+    case {'Lin'}
         % --------------------------------------------------------
         % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
         [newId, meas, exp, inn] = detectLin(lmkIds, raw, Sen);
