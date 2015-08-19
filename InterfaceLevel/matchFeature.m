@@ -37,23 +37,27 @@ switch Raw.type
         end
         
     case 'image'
-        id  = Obs.lid;
-        idx = find(rawDataLmks.app==id);
+        % --------------------------------------------------------
+        % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
         
-        if ~isempty(idx)
-            Obs.meas.y   = rawDataLmks.coord(:,idx);
-            Obs.meas.R   = R;
-            Obs.measured = true;
-            Obs.matched  = true;
-        else
-            Obs.meas.y   = zeros(size(Obs.meas.y));
-            Obs.meas.R   = R;
-            Obs.measured = false;
-            Obs.matched  = false;
-        end
-        % error('??? Feature matching for Raw data type ''%s'' not implemented yet.', Raw.type)
-        % TODO: the 'image' case
         
+        
+%         id  = Obs.lid;
+%         idx = find(rawDataLmks.app==id);
+%         
+%         if ~isempty(idx)
+%             Obs.meas.y   = rawDataLmks.coord(:,idx);
+%             Obs.meas.R   = R;
+%             Obs.measured = true;
+%             Obs.matched  = true;
+%         else
+%             Obs.meas.y   = zeros(size(Obs.meas.y));
+%             Obs.meas.R   = R;
+%             Obs.measured = false;
+%             Obs.matched  = false;
+%         end
+        % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION ----- 
+        % --------------------------------------------------------
     otherwise
         
         error('??? Unknown Raw data type ''%s''.',Raw.type)

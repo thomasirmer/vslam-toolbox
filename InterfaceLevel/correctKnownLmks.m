@@ -74,8 +74,12 @@ if any(vis) % Consider only visible observations
         Lmk(lmk).nSearch = Lmk(lmk).nSearch + 1;
 
         % 3. TRY TO MATCH FEATURE
+        % --------------------------------------------------------
+        % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
         Obs(lmk) = matchFeature(Sen,Raw,Obs(lmk));
-
+        % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
+        % --------------------------------------------------------
+                
         if Obs(lmk).matched
 
             % Update Lmk matched counter

@@ -81,6 +81,9 @@
     <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\VideoMatcher.cpp">
       <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\FindNLineFeatures.cpp">
+      <Filter>Quelldateien\EDLineDetector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\DataTypeParsing.hpp">

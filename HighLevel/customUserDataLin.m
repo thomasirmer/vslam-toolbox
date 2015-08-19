@@ -82,10 +82,10 @@ Sensor{1} = struct(...
   'type',               'pinHole',...   % type of sensor
   'robot',              1,...           % robot where it is mounted
   'position',           [0;0;0],...     % position in robot
-  'orientationDegrees', [0;0;0],...     % orientation in robot, roll pitch yaw
+  'orientationDegrees', [90;180;90],...     % orientation in robot, roll pitch yaw
   'positionStd',        [0;0;0],...     % position error std
   'orientationStd',     [0;0;0],...     % orient. error std
-  'imageSize',          [512;512],...   % image size
+  'imageSize',          [600;600],...   % image size
   'pixErrorStd',        1.0,...         % pixel error std
   'intrinsic',          [322;239;249;249],... % intrinsic params u0, v0, ax, ay
   'distortion',         [],...          % distortion params

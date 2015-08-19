@@ -80,6 +80,7 @@
     <ClCompile Include="..\..\..\EDLinesExtractor\EDLineDetector.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor_Persistence.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\FindNLineFeatures.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\LineDescriptor.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\LineFeature.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Reader.cpp" />
