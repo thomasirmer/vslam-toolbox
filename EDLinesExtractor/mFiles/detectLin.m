@@ -22,8 +22,6 @@ if ~isempty(newIds)
     
     inn.z  = [0;0];
     inn.Z  = meas.R;
-    
-    
 else
     
     newId  = [];

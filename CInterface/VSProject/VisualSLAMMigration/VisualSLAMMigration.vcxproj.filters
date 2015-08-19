@@ -84,6 +84,9 @@
     <ClCompile Include="..\..\..\EDLinesExtractor\FindNLineFeatures.cpp">
       <Filter>Quelldateien\EDLineDetector</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\MatchLines.cpp">
+      <Filter>Quelldateien\EDLineDetector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\DataTypeParsing.hpp">

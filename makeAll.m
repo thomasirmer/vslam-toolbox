@@ -7,7 +7,7 @@ cd ..
 path = strcat(pwd, '\EDLinesExtractor\');
 disp(['Going to ', path]);
 cd(path);
-makeDebug;
+makeLineFeatures_d;
 cd ..
 
 path = strcat(pwd, '\FrameTransforms\');

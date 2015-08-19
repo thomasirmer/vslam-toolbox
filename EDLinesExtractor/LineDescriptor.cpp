@@ -1,12 +1,12 @@
 /*IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
 
- By downloading, copying, installing or using the software you agree to this license.
- If you do not agree to this license, do not download, install,
- copy or use the software.
+By downloading, copying, installing or using the software you agree to this license.
+If you do not agree to this license, do not download, install,
+copy or use the software.
 
 
-                          License Agreement
-               For Open Source Computer Vision Library
+License Agreement
+For Open Source Computer Vision Library
 
 Copyright (C) 2011-2012, Lilian Zhang, all rights reserved.
 Copyright (C) 2013, Manuele Tamburrano, Stefano Fabri, all rights reserved.
@@ -15,15 +15,15 @@ Third party copyrights are property of their respective owners.
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-  * Redistributions of source code must retain the above copyright notice,
-    this list of conditions and the following disclaimer.
+* Redistributions of source code must retain the above copyright notice,
+this list of conditions and the following disclaimer.
 
-  * Redistributions in binary form must reproduce the above copyright notice,
-    this list of conditions and the following disclaimer in the documentation
-    and/or other materials provided with the distribution.
+* Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.
 
-  * The name of the copyright holders may not be used to endorse or promote products
-    derived from this software without specific prior written permission.
+* The name of the copyright holders may not be used to endorse or promote products
+derived from this software without specific prior written permission.
 
 This software is provided by the copyright holders and contributors "as is" and
 any express or implied warranties, including, but not limited to, the implied
@@ -47,7 +47,7 @@ the use of this software, even if advised of the possibility of such damage.
 #include <ctime>
 
 #ifndef M_PI
-    #define M_PI 3.14159265358979323846
+#define M_PI 3.14159265358979323846
 #endif
 
 #ifdef _WIN32 || _WIN64
@@ -65,7 +65,7 @@ using namespace std;
 LineDescriptor::LineDescriptor()
 {
 	srand ( time(NULL) );
-//	cout<<"Call LineDescriptor constructor function"<<endl;
+	//	cout<<"Call LineDescriptor constructor function"<<endl;
 	ksize_       = 5;
 	numOfOctave_ = 5;//5
 	edLineVec_.resize(numOfOctave_);
@@ -82,7 +82,7 @@ LineDescriptor::LineDescriptor()
 	for(int i=0; i<widthOfBand_*3; i++){
 		dis = i-u;
 		gaussCoefL_[i] = exp(dis*dis*invsigma2);
-//		cout<<"gaussCoefL_="<<gaussCoefL_[i]<<endl;
+		//		cout<<"gaussCoefL_="<<gaussCoefL_[i]<<endl;
 	}
 	gaussCoefG_.resize(numOfBand_*widthOfBand_);
 	u = (numOfBand_*widthOfBand_-1)/2;
@@ -91,16 +91,16 @@ LineDescriptor::LineDescriptor()
 	for(int i=0; i<numOfBand_*widthOfBand_; i++){
 		dis = i-u;
 		gaussCoefG_[i] = exp(dis*dis*invsigma2);
-//		cout<<"gaussCoefG_="<<gaussCoefG_[i]<<endl;
+		//		cout<<"gaussCoefG_="<<gaussCoefG_[i]<<endl;
 	}
-//	cout<<"LineDescriptor object is constructed"<<endl;
+	//	cout<<"LineDescriptor object is constructed"<<endl;
 	LowestThreshold = 0.3;//2 is used to show recall ratio;  0.2 is used to show scale space results, 0.35 is used when verify geometric constraints.
 	NNDRThreshold   = 0.6;
 }
 
 LineDescriptor::LineDescriptor(unsigned int numOfBand, unsigned int widthOfBand){
 	srand ( time(NULL) );
-//	cout<<"Call LineDescriptor constructor function"<<endl;
+	//	cout<<"Call LineDescriptor constructor function"<<endl;
 	ksize_       = 5;
 	numOfOctave_ = 5;//5
 	edLineVec_.resize(numOfOctave_);
@@ -117,7 +117,7 @@ LineDescriptor::LineDescriptor(unsigned int numOfBand, unsigned int widthOfBand)
 	for(int i=0; i<widthOfBand_*3; i++){
 		dis = i-u;
 		gaussCoefL_[i] = exp(dis*dis*invsigma2);
-//		cout<<"gaussCoefL_="<<gaussCoefL_[i]<<endl;
+		//		cout<<"gaussCoefL_="<<gaussCoefL_[i]<<endl;
 	}
 	gaussCoefG_.resize(numOfBand_*widthOfBand_);
 	u = (numOfBand_*widthOfBand_-1)/2;
@@ -126,9 +126,9 @@ LineDescriptor::LineDescriptor(unsigned int numOfBand, unsigned int widthOfBand)
 	for(int i=0; i<numOfBand_*widthOfBand_; i++){
 		dis = i-u;
 		gaussCoefG_[i] = exp(dis*dis*invsigma2);
-//		cout<<"gaussCoefG_="<<gaussCoefG_[i]<<endl;
+		//		cout<<"gaussCoefG_="<<gaussCoefG_[i]<<endl;
 	}
-//	cout<<"LineDescriptor object is constructed"<<endl;
+	//	cout<<"LineDescriptor object is constructed"<<endl;
 	LowestThreshold = 0.35;//0.35;
 	NNDRThreshold   = 0.2;//0.6
 }
@@ -142,30 +142,30 @@ LineDescriptor::~LineDescriptor(){
 }
 
 /*Line detection method: element in keyLines[i] includes a set of lines which is the same line
- * detected in different octave images.
- */
+* detected in different octave images.
+*/
 int LineDescriptor::OctaveKeyLines(cv::Mat & image, ScaleLines & keyLines)
 {
 	unsigned int numOfFinalLine = 0;
-	
+
 	float preSigma2 = 0;//orignal image is not blurred, has zero sigma;
 	float curSigma2 = 1.0;//[sqrt(2)]^0=1;
 	float factor = sqrt(2);//the down sample factor between connective two octave images
-	
+
 	for(unsigned int octaveCount = 0; octaveCount<numOfOctave_; octaveCount++){
-	    
-	    cv::Mat blur;
+
+		cv::Mat blur;
 		/* Form each level by adding incremental blur from previous level.
-		 * curSigma = [sqrt(2)]^octaveCount;
-		 * increaseSigma^2 = curSigma^2 - preSigma^2 */
+		* curSigma = [sqrt(2)]^octaveCount;
+		* increaseSigma^2 = curSigma^2 - preSigma^2 */
 		float increaseSigma = sqrt(curSigma2-preSigma2);
 		switch(ksize_){
-            case 3: cv::GaussianBlur(image, blur, cv::Size(3,3), increaseSigma); break;
-            case 5: cv::GaussianBlur(image, blur, cv::Size(5,5), increaseSigma); break;
-            case 7: cv::GaussianBlur(image, blur, cv::Size(7,7), increaseSigma); break;
-            case 9: cv::GaussianBlur(image, blur, cv::Size(9,9), increaseSigma); break;
-            case 11: cv::GaussianBlur(image, blur, cv::Size(11,11), increaseSigma); break;
-            default: cv::GaussianBlur(image, blur, cv::Size(5,5), increaseSigma); break;
+		case 3: cv::GaussianBlur(image, blur, cv::Size(3,3), increaseSigma); break;
+		case 5: cv::GaussianBlur(image, blur, cv::Size(5,5), increaseSigma); break;
+		case 7: cv::GaussianBlur(image, blur, cv::Size(7,7), increaseSigma); break;
+		case 9: cv::GaussianBlur(image, blur, cv::Size(9,9), increaseSigma); break;
+		case 11: cv::GaussianBlur(image, blur, cv::Size(11,11), increaseSigma); break;
+		default: cv::GaussianBlur(image, blur, cv::Size(5,5), increaseSigma); break;
 
 		}
 
@@ -179,7 +179,7 @@ int LineDescriptor::OctaveKeyLines(cv::Mat & image, ScaleLines & keyLines)
 		////////////////////////////////////
 		//down sample the current octave image to get the next octave image
 		image.create((int)(blur.rows/factor), (int)(blur.cols/factor), CV_8UC1);
-		
+
 		sampleUchar(blur.data,image.data, factor, blur.cols,  blur.rows);
 		preSigma2 = curSigma2;
 		curSigma2 = curSigma2*2;
@@ -187,7 +187,7 @@ int LineDescriptor::OctaveKeyLines(cv::Mat & image, ScaleLines & keyLines)
 	/*lines which correspond to the same line in the octave images will be stored in the same element of ScaleLines.*/
 	std::vector<OctaveLine> octaveLines(numOfFinalLine);//store the lines in OctaveLine structure
 	numOfFinalLine = 0;//store the number of finally accepted lines in ScaleLines
-  unsigned int lineIDInScaleLineVec = 0;
+	unsigned int lineIDInScaleLineVec = 0;
 	float dx, dy;
 	for(unsigned int lineCurId=0;lineCurId<edLineVec_[0]->lines_.numOfLines;lineCurId++){//add all line detected in the original image
 		octaveLines[numOfFinalLine].octaveCount    = 0;
@@ -211,7 +211,7 @@ int LineDescriptor::OctaveKeyLines(cv::Mat & image, ScaleLines & keyLines)
 	float direction, near, length;
 	unsigned int octaveID, lineIDInOctave;
 	/*more than one octave image, organize lines in scale space.
-	 *lines corresponding to the same line in octave images should have the same index in the ScaleLineVec */
+	*lines corresponding to the same line in octave images should have the same index in the ScaleLineVec */
 	if(numOfOctave_>1){
 		float twoPI = 2*M_PI;
 		unsigned int closeLineID;
@@ -219,11 +219,11 @@ int LineDescriptor::OctaveKeyLines(cv::Mat & image, ScaleLines & keyLines)
 		float lp0,lp1, lp2, lp3, np0,np1, np2, np3;
 		for(unsigned int octaveCount = 1; octaveCount<numOfOctave_; octaveCount++){
 			/*for each line in current octave image, find their corresponding lines in the octaveLines,
-			 *give them the same value of lineIDInScaleLineVec*/
+			*give them the same value of lineIDInScaleLineVec*/
 			for(unsigned int lineCurId=0;lineCurId<edLineVec_[octaveCount]->lines_.numOfLines;lineCurId++){
 				rho1 = scale[octaveCount] *  fabs(edLineVec_[octaveCount]->lineEquations_[lineCurId][2]);
 				/*nearThreshold depends on the distance of the image coordinate origin to current line.
-				 *so nearThreshold = rho1 * nearThresholdRatio, where nearThresholdRatio = 1-cos(10*pi/180) = 0.0152*/
+				*so nearThreshold = rho1 * nearThresholdRatio, where nearThresholdRatio = 1-cos(10*pi/180) = 0.0152*/
 				tempValue = rho1 * 0.0152;
 				float nearThreshold = (tempValue>6)?(tempValue):6;
 				nearThreshold = (nearThreshold<12)?nearThreshold:12;
@@ -238,28 +238,28 @@ int LineDescriptor::OctaveKeyLines(cv::Mat & image, ScaleLines & keyLines)
 					}
 					lineIDInOctave = octaveLines[lineNextId].lineIDInOctave;
 					/*first check whether current line and next line are parallel.
-					 *If line1:a1*x+b1*y+c1=0 and line2:a2*x+b2*y+c2=0 are parallel, then
-					 *-a1/b1=-a2/b2, i.e., a1b2=b1a2.
-					 *we define parallel=fabs(a1b2-b1a2)
-					 *note that, in EDLine class, we have normalized the line equations to make a1^2+ b1^2 = a2^2+ b2^2 = 1*/
+					*If line1:a1*x+b1*y+c1=0 and line2:a2*x+b2*y+c2=0 are parallel, then
+					*-a1/b1=-a2/b2, i.e., a1b2=b1a2.
+					*we define parallel=fabs(a1b2-b1a2)
+					*note that, in EDLine class, we have normalized the line equations to make a1^2+ b1^2 = a2^2+ b2^2 = 1*/
 					direction = fabs(edLineVec_[octaveCount]->lineDirection_[lineCurId] -
-							edLineVec_[octaveID]->lineDirection_[lineIDInOctave]);
+						edLineVec_[octaveID]->lineDirection_[lineIDInOctave]);
 					if(direction>0.1745&&(twoPI - direction>0.1745)){
 						continue;//the angle between two lines are larger than 10degrees(i.e. 10*pi/180=0.1745), they are not close to parallel.
 					}
 					/*now check whether current line and next line are near to each other.
-					 *If line1:a1*x+b1*y+c1=0 and line2:a2*x+b2*y+c2=0 are near in image, then
-					 *rho1 = |a1*0+b1*0+c1|/sqrt(a1^2+b1^2) and rho2 = |a2*0+b2*0+c2|/sqrt(a2^2+b2^2) should close.
-					 *In our case, rho1 = |c1| and rho2 = |c2|, because sqrt(a1^2+b1^2) = sqrt(a2^2+b2^2) = 1;
-					 *note that, lines are in different octave images, so we define near =  fabs(scale*rho1 - rho2) or
-					 *where scale is the scale factor between to octave images*/
+					*If line1:a1*x+b1*y+c1=0 and line2:a2*x+b2*y+c2=0 are near in image, then
+					*rho1 = |a1*0+b1*0+c1|/sqrt(a1^2+b1^2) and rho2 = |a2*0+b2*0+c2|/sqrt(a2^2+b2^2) should close.
+					*In our case, rho1 = |c1| and rho2 = |c2|, because sqrt(a1^2+b1^2) = sqrt(a2^2+b2^2) = 1;
+					*note that, lines are in different octave images, so we define near =  fabs(scale*rho1 - rho2) or
+					*where scale is the scale factor between to octave images*/
 					rho2 = scale[octaveID] * fabs(edLineVec_[octaveID]->lineEquations_[lineIDInOctave][2]);
 					near = fabs(rho1 - rho2);
 					if(near>nearThreshold){
 						continue;//two line are not near in the image
 					}
 					/*now check the end points distance between two lines, the scale of  distance is in the original image size.
-					 * find the minimal and maximal end points distance*/
+					* find the minimal and maximal end points distance*/
 					lp0 = scale[octaveCount] *edLineVec_[octaveCount]->lineEndpoints_[lineCurId][0];
 					lp1 = scale[octaveCount] *edLineVec_[octaveCount]->lineEndpoints_[lineCurId][1];
 					lp2 = scale[octaveCount] *edLineVec_[octaveCount]->lineEndpoints_[lineCurId][2];
@@ -317,7 +317,7 @@ int LineDescriptor::OctaveKeyLines(cv::Mat & image, ScaleLines & keyLines)
 	//Reorganize the detected lines into keyLines
 	keyLines.clear();
 	keyLines.resize(lineIDInScaleLineVec);
-  unsigned int tempID;
+	unsigned int tempID;
 	float s1,e1,s2,e2;
 	bool shouldChange;
 	OctaveSingleLine singleLine;
@@ -330,7 +330,7 @@ int LineDescriptor::OctaveKeyLines(cv::Mat & image, ScaleLines & keyLines)
 		singleLine.lineLength = octaveLines[lineID].lineLength;
 		singleLine.salience  = edLineVec_[octaveID]->lineSalience_[lineIDInOctave];
 		singleLine.numOfPixels = edLineVec_[octaveID]->lines_.sId[lineIDInOctave+1]-
-		                         edLineVec_[octaveID]->lines_.sId[lineIDInOctave];
+			edLineVec_[octaveID]->lines_.sId[lineIDInOctave];
 		//decide the start point and end point
 		shouldChange = false;
 		s1 = edLineVec_[octaveID]->lineEndpoints_[lineIDInOctave][0];//sx
@@ -377,13 +377,13 @@ int LineDescriptor::OctaveKeyLines(cv::Mat & image, ScaleLines & keyLines)
 
 	////////////////////////////////////
 
-  delete [] scale;
-  return 1;
+	delete [] scale;
+	return 1;
 }
 
 /*The definitions of line descriptor,mean values of {g_dL>0},{g_dL<0},{g_dO>0},{g_dO<0} of each row in band
- *and std values of sum{g_dL>0},sum{g_dL<0},sum{g_dO>0},sum{g_dO<0} of each row in band.
- * With overlap region. */
+*and std values of sum{g_dL>0},sum{g_dL<0},sum{g_dO>0},sum{g_dO<0} of each row in band.
+* With overlap region. */
 int LineDescriptor::ComputeLBD_(ScaleLines &keyLines)
 {
 	//the default length of the band is the line length.
@@ -453,7 +453,7 @@ int LineDescriptor::ComputeLBD_(ScaleLines &keyLines)
 			lineMiddlePointX = 0.5 * (pSingleLine->sPointInOctaveX +  pSingleLine->ePointInOctaveX);
 			lineMiddlePointY = 0.5 * (pSingleLine->sPointInOctaveY +  pSingleLine->ePointInOctaveY);
 			/*1.rotate the local coordinate system to the line direction
-			 *2.compute the gradient projection of pixels in line support region*/
+			*2.compute the gradient projection of pixels in line support region*/
 			dL[0] = cos(pSingleLine->direction);
 			dL[1] = sin(pSingleLine->direction);
 			dO[0] = -dL[1];
@@ -477,7 +477,7 @@ int LineDescriptor::ComputeLBD_(ScaleLines &keyLines)
 					tempCor = round(sCorY);
 					yCor = (tempCor<0)?0:(tempCor>imageHeight)?imageHeight:tempCor;
 					/* To achieve rotation invariance, each simple gradient is rotated aligned with
-					 * the line direction and clockwise orthogonal direction.*/
+					* the line direction and clockwise orthogonal direction.*/
 					dx = pdxImg[yCor*realWidth+xCor];
 					dy = pdyImg[yCor*realWidth+xCor];
 					gDL = dx * dL[0] + dy * dL[1];
@@ -521,8 +521,8 @@ int LineDescriptor::ComputeLBD_(ScaleLines &keyLines)
 				pgdO2BandSum[bandID] +=  coefInGaussion * coefInGaussion * pgdO2RowSum;
 				ngdO2BandSum[bandID] +=  coefInGaussion * coefInGaussion * ngdO2RowSum;
 				/* In order to reduce boundary effect along the line gradient direction,
-				 * a row's gradient will contribute not only to its current band, but also
-				 * to its nearest upper and down band with gaussCoefL_.*/
+				* a row's gradient will contribute not only to its current band, but also
+				* to its nearest upper and down band with gaussCoefL_.*/
 				bandID--;
 				if(bandID>=0){//the band above the current band
 					coefInGaussion = gaussCoefL_[hID%widthOfBand_ + 2*widthOfBand_];
@@ -555,7 +555,7 @@ int LineDescriptor::ComputeLBD_(ScaleLines &keyLines)
 			desVec = pSingleLine->descriptor.data();
 			short desID;
 			/*Note that the first and last bands only have (lengthOfLSP * widthOfBand_ * 2.0) pixels
-			 * which are counted. */
+			* which are counted. */
 			float invN2 = 1.0/(widthOfBand_ * 2.0);
 			float invN3 = 1.0/(widthOfBand_ * 3.0);
 			float invN, temp;
@@ -606,9 +606,9 @@ int LineDescriptor::ComputeLBD_(ScaleLines &keyLines)
 				(*desVec) = *(desVec++) * tempS;//desVec[8*i+7] =  desVec[8*i+7] * tempS;
 			}
 			/*In order to reduce the influence of non-linear illumination,
-			 *a threshold is used to limit the value of element in the unit feature
-			 *vector no larger than this threshold. In Z.Wang's work, a value of 0.4 is found
-			 *empirically to be a proper threshold.*/
+			*a threshold is used to limit the value of element in the unit feature
+			*vector no larger than this threshold. In Z.Wang's work, a value of 0.4 is found
+			*empirically to be a proper threshold.*/
 			desVec = pSingleLine->descriptor.data();
 			for(short i=0; i<descriptorSize; i++ ){
 				if(desVec[i]>0.4){
@@ -645,37 +645,37 @@ int LineDescriptor::ComputeLBD_(ScaleLines &keyLines)
 
 int LineDescriptor::GetLineDescriptor(cv::Mat & image, ScaleLines & keyLines)
 {
-    double t = (double)cv::getTickCount();
-    if(!OctaveKeyLines(image,keyLines)){
-        cout<<"OctaveKeyLines failed"<<endl;
-        return -1;
-    }
-    t = ((double)cv::getTickCount() - t)/cv::getTickFrequency();
-    //std::cout<<"time line extraction: "<<t<<"s"<<std::endl;
-    
-//    t = (double)cv::getTickCount();
-//    ComputeLBD_(keyLines);
-//    t = ((double)cv::getTickCount() - t)/cv::getTickFrequency();
-//    std::cout<<"time descriptor extraction: "<<t<<"s"<<std::endl;
-//    
-    
-//    for(int j = 0; j<keyLines.size(); j++)
-//    {
-//        for(int k = 0; k<keyLines[j].size(); k++)
-//        {
-//            for(int i = 0; i<keyLines[j][k].descriptor.size(); i++)
-//                std::cout<<"keylines["<<j<<"]["<<k<<"].descriptor["<<i<<"]: "<<keyLines[j][k].descriptor[i]<<std::endl;
-//        }
-//    }
-    
-    return 1;
+	double t = (double)cv::getTickCount();
+	if(!OctaveKeyLines(image, keyLines)){
+		cout<<"OctaveKeyLines failed"<<endl;
+		return -1;
+	}
+	t = ((double)cv::getTickCount() - t)/cv::getTickFrequency();
+	//std::cout<<"time line extraction: "<<t<<"s"<<std::endl;
+
+	//    t = (double)cv::getTickCount();
+	//    ComputeLBD_(keyLines);
+	//    t = ((double)cv::getTickCount() - t)/cv::getTickFrequency();
+	//    std::cout<<"time descriptor extraction: "<<t<<"s"<<std::endl;
+	//    
+
+	//    for(int j = 0; j<keyLines.size(); j++)
+	//    {
+	//        for(int k = 0; k<keyLines[j].size(); k++)
+	//        {
+	//            for(int i = 0; i<keyLines[j][k].descriptor.size(); i++)
+	//                std::cout<<"keylines["<<j<<"]["<<k<<"].descriptor["<<i<<"]: "<<keyLines[j][k].descriptor[i]<<std::endl;
+	//        }
+	//    }
+
+	return 1;
 }
 
 /*Match line by their descriptors.
- *The function will use opencv FlannBasedMatcher to mathc lines. */
+*The function will use opencv FlannBasedMatcher to mathc lines. */
 int LineDescriptor::MatchLineByDescriptor(ScaleLines &keyLinesLeft, 	ScaleLines &keyLinesRight,
-		std::vector<short> &matchLeft, std::vector<short> &matchRight,
-		int criteria)
+										  std::vector<short> &matchLeft, std::vector<short> &matchRight,
+										  int criteria)
 {
 	int leftSize = keyLinesLeft.size();
 	int rightSize = keyLinesRight.size();

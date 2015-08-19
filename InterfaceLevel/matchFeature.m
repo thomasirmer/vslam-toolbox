@@ -39,9 +39,20 @@ switch Raw.type
     case 'image'
         % --------------------------------------------------------
         % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
+        id  = Obs.lid;
+        idx = find(rawDataLmks.app==id);
         
-        
-        
+        if ~isempty(idx)
+            % LINE MATCHING COMES HERE
+            % Prototype: (later: only search in 3-sigma-neighbourhood)
+            % [Obs.meas.y] = LineMatching(currentObs, allRawCoords);
+        else
+            Obs.meas.y   = zeros(size(Obs.meas.y));
+            Obs.meas.R   = R;
+            Obs.measured = false;
+            Obs.matched  = false;
+        end
+%         end
 %         id  = Obs.lid;
 %         idx = find(rawDataLmks.app==id);
 %         
