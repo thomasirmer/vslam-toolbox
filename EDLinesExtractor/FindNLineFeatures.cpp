@@ -41,13 +41,16 @@ void mexFunction(int nlhs, mxArray *plhs[],
 	// ---------------------------------------------------------------------------
 
 	// ----- load lines into output structure ------------------------------------
-	Mat lineFeatureOutput(nLongestLineFeatures.size(), 5, CV_64FC1);
+	Mat lineFeatureOutput(nLongestLineFeatures.size(), 8, CV_64FC1);
 	for (int i = 0; i < nLongestLineFeatures.size(); i++) {
 		lineFeatureOutput.at<double>(i, 0) = (double) nLongestLineFeatures[i][0].startPointX;
 		lineFeatureOutput.at<double>(i, 1) = (double) nLongestLineFeatures[i][0].startPointY;
 		lineFeatureOutput.at<double>(i, 2) = (double) nLongestLineFeatures[i][0].endPointX;
 		lineFeatureOutput.at<double>(i, 3) = (double) nLongestLineFeatures[i][0].endPointY;
-		lineFeatureOutput.at<double>(i, 4) = (double) nLongestLineFeatures[i][0].lineLength;
+		lineFeatureOutput.at<double>(i, 4) = (double) nLongestLineFeatures[i][0].direction;
+		lineFeatureOutput.at<double>(i, 5) = (double) nLongestLineFeatures[i][0].salience;
+		lineFeatureOutput.at<double>(i, 6) = (double) nLongestLineFeatures[i][0].lineLength;
+		lineFeatureOutput.at<double>(i, 7) = (double) nLongestLineFeatures[i][0].numOfPixels;
 	}
 	// ---------------------------------------------------------------------------
 

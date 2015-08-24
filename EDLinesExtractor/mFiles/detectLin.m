@@ -16,6 +16,7 @@ if ~isempty(newIds)
     % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
     meas.y = raw.segments.coord(:,newIdx);
     meas.R = blkdiag(Sen.par.pixCov, Sen.par.pixCov);
+    meas.line = raw.segments.lines(newIdx, :);
     [exp.e,exp.E] = propagateUncertainty(meas.y, meas.R, @seg2hmgLin);
     % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
     % --------------------------------------------------------

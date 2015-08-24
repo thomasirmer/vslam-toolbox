@@ -45,7 +45,13 @@ switch Raw.type
         if ~isempty(idx)
             % LINE MATCHING COMES HERE
             % Prototype: (later: only search in 3-sigma-neighbourhood)
-            % [Obs.meas.y] = LineMatching(currentObs, allRawCoords);
+
+            matchedLine = MatchLines(Obs.meas.line, Raw.data.segments.lines);
+            
+            Obs.meas.y = Raw.data.segments.lines(matchedLine(1,3) + 1, 1:4)';
+            Obs.meas.R   = R;
+            Obs.measured = true;
+            Obs.matched  = true;
         else
             Obs.meas.y   = zeros(size(Obs.meas.y));
             Obs.meas.R   = R;

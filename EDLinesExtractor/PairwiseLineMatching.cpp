@@ -34,13 +34,13 @@ using namespace cv;
 /*The following four thresholds are used to decide whether a line in the left and a line in the right
  *are the possible matched line pair. If they are, then their differences should be smaller than these
  *thresholds.*/
-#define LengthDifThreshold                 1.4
-#define AngleDifferenceThreshold           0.23854//45degree
+#define LengthDifThreshold                 1.5
+#define AngleDifferenceThreshold           1.5708//45degree
 #define DescriptorDifThreshold             0.35//0.35, or o.5 are good values for LBD
 /*The following four threshold are used to decide whether the two possible matched line pair agree with each other.
  *They reflect the similarity of pairwise geometric information.
  */
-#define RelativeAngleDifferenceThreshold   0.237854//45degree
+#define RelativeAngleDifferenceThreshold   1.5708//45degree
 #define IntersectionRationDifThreshold     1
 #define ProjectionRationDifThreshold       1
 

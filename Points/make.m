@@ -1,2 +1,2 @@
-disp('Compiling normvec_c.cpp');
+disp('Compiling fromFrame_c.cpp');
 mexOpenCV 'fromFrame_c.cpp';

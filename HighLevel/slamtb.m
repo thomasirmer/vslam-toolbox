@@ -125,6 +125,7 @@ for rob = [Rob.rob]
         Raw(sen).data.img            = image;
         Raw(sen).data.segments.coord = lines(:, 1:4)';
         Raw(sen).data.segments.app   = 1:size(lines, 1);
+        Raw(sen).data.segments.lines = lines;
         
         % ---- PLOTTING ----
 %         if exist('hFigureImage', 'var') == 0
