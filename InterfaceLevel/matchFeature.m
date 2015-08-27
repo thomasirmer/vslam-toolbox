@@ -1,4 +1,4 @@
-function Obs = matchFeature(Sen,Raw,Obs)
+function Obs = matchFeature(Sen,Raw,Obs,Rob)
 
 % MATCHFEATURE  Match feature.
 % 	Obs = MATCHFEATURE(Sen,Raw,Obs) matches one feature in Raw to the predicted
@@ -43,12 +43,58 @@ switch Raw.type
         idx = find(rawDataLmks.app==id);
         
         if ~isempty(idx)
-            % LINE MATCHING COMES HERE
-            % Prototype: (later: only search in 3-sigma-neighbourhood)
-
-            matchedLine = MatchLines(Obs.meas.line, Raw.data.segments.lines);
             
-            Obs.meas.y = Raw.data.segments.lines(matchedLine(1,3) + 1, 1:4)';
+            % --------------------------------------------------------
+            % homogenous coordinates observation
+            obs_l = Obs.exp.e(1);
+            obs_m = Obs.exp.e(2);
+            obs_n = Obs.exp.e(3);
+            
+            % --------------------------------------------------------
+            % homogenous coordinates raw lines
+            nLines = size(rawDataLmks.lines, 1);
+            for i = 1:nLines
+                [rawDataLmks.hmgCoords(:,i), ~] = seg2hmgLin(rawDataLmks.coord(:,i));
+            end
+            
+            % --------------------------------------------------------
+            % check all possible lines
+            j = 1;
+            possibleMatches = zeros(nLines, size(rawDataLmks.lines, 2) + 1);
+            for i = 1:nLines
+                % normalize homogenous coordinates of raw line to observation
+                raw_l = rawDataLmks.hmgCoords(1,i);
+                raw_m = rawDataLmks.hmgCoords(2,i);
+                raw_n = rawDataLmks.hmgCoords(3,i);
+                                
+                norm = obs_n / raw_n;
+                
+                raw_l = raw_l * norm;
+                raw_m = raw_m * norm;
+                raw_n = raw_n * norm;
+                
+                % calculate 3-sigma neighborhood
+                l_3sigma = 10 * sqrt(Obs.exp.E(1,1));
+                m_3sigma = 10 * sqrt(Obs.exp.E(2,2));
+                n_3sigma = 10 * sqrt(Obs.exp.E(3,3));
+                
+                % check if raw line in 3-sigma range
+                if (raw_l > obs_l - l_3sigma && raw_l < obs_l + l_3sigma && ...
+                    raw_m > obs_m - m_3sigma && raw_m < obs_m + m_3sigma && ...
+                    raw_n > obs_n - n_3sigma && raw_n < obs_n + n_3sigma)
+                    
+                    possibleMatches(j,1:8) = rawDataLmks.lines(i,:);
+                    possibleMatches(j,9) = i;
+                    %plotSegLine(rawDataLmks.coord(:,i));
+                    j = j + 1;
+                end
+            end
+            
+            %plotHmgLine(Obs.meas, Obs.exp);
+                        
+            matchedLine = MatchLines(Obs.meas.line, rawDataLmks.lines);
+            
+            Obs.meas.y   = possibleMatches(matchedLine(1,3)+1, 1:4)';
             Obs.meas.R   = R;
             Obs.measured = true;
             Obs.matched  = true;

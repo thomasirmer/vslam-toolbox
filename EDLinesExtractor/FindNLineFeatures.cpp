@@ -34,6 +34,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
 
 	// put n longest lines into new data structure
 	ScaleLines nLongestLineFeatures;
+	nLines = min(nLines, (int)lineFeatures.size());
 	nLongestLineFeatures.resize(nLines);
 	for (int i = 0; i < nLines; i++) {
 		nLongestLineFeatures[i].push_back(lineFeatures[i][0]);

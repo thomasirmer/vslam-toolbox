@@ -76,7 +76,7 @@ if any(vis) % Consider only visible observations
         % 3. TRY TO MATCH FEATURE
         % --------------------------------------------------------
         % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
-        Obs(lmk) = matchFeature(Sen,Raw,Obs(lmk));
+        Obs(lmk) = matchFeature(Sen,Raw,Obs(lmk),Rob);
         % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
         % --------------------------------------------------------
                 

@@ -118,8 +118,8 @@ for rob = [Rob.rob]
         end
         clear d1;
 
-        % ----- LINE MATCHING -----
-        lines = FindNLineFeatures(image, 32);
+        % ----- LINE DETECTION -----
+        lines = FindNLineFeatures(image, 64);
         
         % assign to Raw structure
         Raw(sen).data.img            = image;
@@ -128,10 +128,10 @@ for rob = [Rob.rob]
         Raw(sen).data.segments.lines = lines;
         
         % ---- PLOTTING ----
-%         if exist('hFigureImage', 'var') == 0
-%             hFigureImage = figure;
-%         end   
-%         plotLines(image, lines, hFigureImage);
+        if exist('hFigureImage', 'var') == 0
+            hFigureImage = figure;
+        end   
+        plotLines(image, lines, hFigureImage);
         
         clear image lines;
     end
@@ -158,7 +158,7 @@ end
         % Process sensor observations
         for sen = Rob(rob).sensors
 
-            % Observe knowm landmarks
+            % Observe known landmarks
             [Rob(rob),Sen(sen),Lmk,Obs(sen,:)] = correctKnownLmks( ...
                 Rob(rob),   ...
                 Sen(sen),   ...
