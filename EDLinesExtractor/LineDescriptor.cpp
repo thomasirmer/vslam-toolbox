@@ -94,7 +94,7 @@ LineDescriptor::LineDescriptor()
 		//		cout<<"gaussCoefG_="<<gaussCoefG_[i]<<endl;
 	}
 	//	cout<<"LineDescriptor object is constructed"<<endl;
-	LowestThreshold = 0.3;//2 is used to show recall ratio;  0.2 is used to show scale space results, 0.35 is used when verify geometric constraints.
+	LowestThreshold = 2;//2 is used to show recall ratio;  0.2 is used to show scale space results, 0.35 is used when verify geometric constraints.
 	NNDRThreshold   = 0.6;
 }
 
@@ -650,11 +650,12 @@ int LineDescriptor::GetLineDescriptor(cv::Mat & image, ScaleLines & keyLines)
 		cout<<"OctaveKeyLines failed"<<endl;
 		return -1;
 	}
-	t = ((double)cv::getTickCount() - t)/cv::getTickFrequency();
-	//std::cout<<"time line extraction: "<<t<<"s"<<std::endl;
+
+	//	  t = ((double)cv::getTickCount() - t)/cv::getTickFrequency();
+	//    std::cout<<"time line extraction: "<<t<<"s"<<std::endl;
 
 	//    t = (double)cv::getTickCount();
-	//    ComputeLBD_(keyLines);
+	ComputeLBD_(keyLines);
 	//    t = ((double)cv::getTickCount() - t)/cv::getTickFrequency();
 	//    std::cout<<"time descriptor extraction: "<<t<<"s"<<std::endl;
 	//    

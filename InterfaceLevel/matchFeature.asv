@@ -44,14 +44,27 @@ switch Raw.type
         
         if ~isempty(idx)
             
-            % --------------------------------------------------------
-            % homogenous coordinates observation
-            obs_l = Obs.exp.e(1);
-            obs_m = Obs.exp.e(2);
-            obs_n = Obs.exp.e(3);
+            hold on
             
             % --------------------------------------------------------
-            % homogenous coordinates raw lines
+            % normalize observation
+            obs_norm = Obs.exp.e / max(Obs.exp.e(1:2));
+            
+            % --------------------------------------------------------
+            % homogenous coordinates of observation
+            obs_l = obs_norm(1);
+            obs_m = obs_norm(2);
+            obs_n = obs_norm(3);
+            
+            % --------------------------------------------------------
+            % calculate neighborhood range (n-sigma);
+            n = 20;
+            l_sigma = n * sqrt(Obs.exp.E(1,1));
+            m_sigma = n * sqrt(Obs.exp.E(2,2));
+            n_sigma = n * sqrt(Obs.exp.E(3,3));
+            
+            % --------------------------------------------------------
+            % homogenous coordinates of raw lines
             nLines = size(rawDataLmks.lines, 1);
             for i = 1:nLines
                 [rawDataLmks.hmgCoords(:,i), ~] = seg2hmgLin(rawDataLmks.coord(:,i));
@@ -62,44 +75,61 @@ switch Raw.type
             j = 1;
             possibleMatches = zeros(nLines, size(rawDataLmks.lines, 2) + 1);
             for i = 1:nLines
-                % normalize homogenous coordinates of raw line to observation
-                raw_l = rawDataLmks.hmgCoords(1,i);
-                raw_m = rawDataLmks.hmgCoords(2,i);
-                raw_n = rawDataLmks.hmgCoords(3,i);
-                                
-                norm = obs_n / raw_n;
                 
-                raw_l = raw_l * norm;
-                raw_m = raw_m * norm;
-                raw_n = raw_n * norm;
+                % --------------------------------------------------------
+                % normalize raw line
+                raw_norm = rawDataLmks.hmgCoords(:,i) / max(rawDataLmks.hmgCoords(1:2,i));
                 
-                % calculate 3-sigma neighborhood
-                l_3sigma = 10 * sqrt(Obs.exp.E(1,1));
-                m_3sigma = 10 * sqrt(Obs.exp.E(2,2));
-                n_3sigma = 10 * sqrt(Obs.exp.E(3,3));
+                % --------------------------------------------------------
+                % homogenous coordinates of raw line
+                raw_l = raw_norm(1);
+                raw_m = raw_norm(2);
+                raw_n = raw_norm(3);
                 
-                % check if raw line in 3-sigma range
-                if (raw_l > obs_l - l_3sigma && raw_l < obs_l + l_3sigma && ...
-                    raw_m > obs_m - m_3sigma && raw_m < obs_m + m_3sigma && ...
-                    raw_n > obs_n - n_3sigma && raw_n < obs_n + n_3sigma)
+                % --------------------------------------------------------
+                % normalization factors
+                %norm_l = obs_l / raw_l;
+                %norm_m = obs_m / raw_m;
+                %norm_n = obs_n / raw_n;
+                
+                % --------------------------------------------------------
+                % check if (m, n) in n-sigma range
+                %raw_norm_l = raw_l * norm_l;
+                %raw_norm_m = raw_m * norm_l;
+                %raw_norm_n = raw_n * norm_l;
+                
+                if (raw_l > obs_l - l_sigma && raw_l < obs_l + l_sigma && ...
+                    raw_m > obs_m - m_sigma && raw_m < obs_m + m_sigma && ...
+                    raw_n > obs_n - n_sigma && raw_n < obs_n + n_sigma)
                     
                     possibleMatches(j,1:8) = rawDataLmks.lines(i,:);
                     possibleMatches(j,9) = i;
-                    %plotSegLine(rawDataLmks.coord(:,i));
+                    plotSegLine(rawDataLmks.coord(:,i), 'blue--*');
                     j = j + 1;
                 end
             end
             
-            %plotHmgLine(Obs.meas, Obs.exp);
+            plotHmgLine(Obs.exp.e, 'green');
+            plotSegLine(Obs.meas.y, 'magenta--*');
+                        
+            % --------------------------------------------------------
+            % select only possible matches
+            if (j >= 2)
+                possibleMatches = possibleMatches(1:j-1,:);
+            else
+                possibleMatches = [];
+            end
             
-            possibleMatches
+            if (size(possibleMatches, 1) >= 2)
+                matchedLine = MatchLines(Obs.meas.line, rawDataLmks.lines);
+            elseif (size(possibleMatches, 1) == 1)
+                matchedLine = possibleMatches(1,
+            end
             
-            matchedLine = MatchLines(Obs.meas.line, Raw.data.segments.lines);
-            
-            Obs.meas.y   = Raw.data.segments.lines(matchedLine(1,3) + 1, 1:4)';
-            Obs.meas.R   = R;
-            Obs.measured = true;
-            Obs.matched  = true;
+%            Obs.meas.y   = possibleMatches(matchedLine(1,3)+1, 1:4)';
+%            Obs.meas.R   = R;
+%           Obs.measured = true;
+%           Obs.matched  = true;
         else
             Obs.meas.y   = zeros(size(Obs.meas.y));
             Obs.meas.R   = R;
