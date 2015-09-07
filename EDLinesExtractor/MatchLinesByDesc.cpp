@@ -77,7 +77,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
 		octave.descriptor.clear();
 		octave.descriptor.resize(72);
 		for (int i = 0; i < 72; i++) {
-			octave.descriptor.at(i) = p_rawObs[row + 8 + i * nRows];
+			octave.descriptor.at(i) = p_rawObs[row + (i+8) * nRows];
 		}
 
 		rawObs[row].push_back(octave);
@@ -92,15 +92,14 @@ void mexFunction(int nlhs, mxArray *plhs[],
 	// ------------------------------------------------------------------------
 
 	// ----- line matching output to matlab -----------------------------------
-	//Mat matchingResultsOutput(matchResult.size(), 3, CV_64FC1);
-	//for (int i = 0; i < matchResult.size(); i++) {
-	//	matchingResultsOutput.at<double>(i, 0) = (double) i;
-	//	matchingResultsOutput.at<double>(i, 1) = (double) matchResult.at(i).first;
-	//	matchingResultsOutput.at<double>(i, 2) = (double) matchResult.at(i).second;
-	//}
+	Mat matchingResultsOutput(1 ,1, CV_64FC1);
+	if (matchRawObs.size() > 0)
+		matchingResultsOutput.at<double>(0, 0) = (double) matchRawObs.at(0);
+	else
+		matchingResultsOutput.at<double>(0, 0) = (double) -1;
 
-	//plhs[0] = mxCreateDoubleMatrix(matchingResultsOutput.rows, matchingResultsOutput.cols, mxREAL);
-	//double *data_out = (double*) mxGetData(plhs[0]);
-	//openCVMat2MatlabMat(matchingResultsOutput, data_out);
+	plhs[0] = mxCreateDoubleMatrix(matchingResultsOutput.rows, matchingResultsOutput.cols, mxREAL);
+	double *data_out = (double*) mxGetData(plhs[0]);
+	openCVMat2MatlabMat(matchingResultsOutput, data_out);
 	// ------------------------------------------------------------------------
 }

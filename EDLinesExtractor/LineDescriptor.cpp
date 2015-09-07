@@ -705,7 +705,10 @@ int LineDescriptor::MatchLineByDescriptor(ScaleLines &keyLinesLeft, 	ScaleLines 
 						desMax = desR+desDim;
 						dis = 0;
 						while(desR<desMax){
-							temp = *(desL++) - *(desR++);
+							float dataL = *(desL++);
+							float dataR = *(desR++);
+							//temp = *(desL++) - *(desR++);
+							temp = dataL - dataR;
 							dis += temp*temp;
 						}
 						dis = sqrt(dis);

@@ -86,6 +86,7 @@
     <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Reader.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\VideoMatcher.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\MatchLines.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\MatchLinesByDesc.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\updateFrame_c.cpp" />

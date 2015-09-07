@@ -128,10 +128,10 @@ for rob = [Rob.rob]
         Raw(sen).data.segments.lines = lines;
         
         % ---- PLOTTING ----
-        if exist('hFigureImage', 'var') == 0
-            hFigureImage = figure;
-        end   
-        plotLines(image, lines, hFigureImage);
+%         if exist('hFigureImage', 'var') == 0
+%             hFigureImage = figure;
+%         end   
+%         plotLines(image, lines, hFigureImage);
         
         clear image lines;
     end

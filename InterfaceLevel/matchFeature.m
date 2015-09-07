@@ -104,25 +104,34 @@ switch Raw.type
                     
                     possibleMatches(j,1:80) = rawDataLmks.lines(i,:);
                     possibleMatches(j,81) = i;
-                    plotSegLine(rawDataLmks.coord(:,i), 'blue--*');
+                    %plotSegLine(rawDataLmks.coord(:,i), 'blue--*');
                     j = j + 1;
                 end
             end
             
-            plotHmgLine(Obs.exp.e, 'green');
-            plotSegLine(Obs.meas.y, 'magenta--*');
+            %plotHmgLine(Obs.exp.e, 'green');
+            %plotSegLine(Obs.meas.y, 'magenta--*');
+            
+            hold off
                         
             % --------------------------------------------------------
             % select only possible matches
             possibleMatches = possibleMatches(1:j-1,:);
             
             %matchedLine = MatchLines(Obs.meas.line, possibleMatches);
-            MatchLinesByDesc(Obs.meas.line, possibleMatches);
+            matchedLine = MatchLinesByDesc(Obs.meas.line, possibleMatches);
             
-            Obs.meas.y   = zeros(size(Obs.meas.y)); % TODO: Get coords of matched line
-            Obs.meas.R   = R;
-            Obs.measured = true;
-            Obs.matched  = true;
+            if (matchedLine ~= -1)
+                Obs.meas.y   = possibleMatches(matchedLine + 1, 1:4)';
+                Obs.meas.R   = R;
+                Obs.measured = true;
+                Obs.matched  = true;
+            else
+                Obs.meas.y   = zeros(size(Obs.meas.y));
+                Obs.meas.R   = R;
+                Obs.measured = false;
+                Obs.matched  = false;
+            end
             
         else
             Obs.meas.y   = zeros(size(Obs.meas.y));
