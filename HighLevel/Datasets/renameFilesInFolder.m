@@ -1,4 +1,4 @@
-function [ ] = rename( path, ext )
+function [ ] = renameFilesInFolder( path, ext )
     
     filespec = sprintf('%s%s%s%s', './', path, '/*.', ext);
     files = dir(filespec);

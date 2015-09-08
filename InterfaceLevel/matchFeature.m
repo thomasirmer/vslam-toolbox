@@ -39,13 +39,12 @@ switch Raw.type
     case 'image'
         % --------------------------------------------------------
         % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
+
         id  = Obs.lid;
-        idx = find(rawDataLmks.app==id);
+        idx = find(rawDataLmks.app == id, 1);
         
         if ~isempty(idx)
-            
-            hold on
-            
+           
             % --------------------------------------------------------
             % normalize observation
             obs_norm = Obs.exp.e / max(Obs.exp.e(1:2));
@@ -64,17 +63,14 @@ switch Raw.type
             n_sigma = n * sqrt(Obs.exp.E(3,3));
             
             % --------------------------------------------------------
-            % homogenous coordinates of raw lines
-            nLines = size(rawDataLmks.lines, 1);
-            for i = 1:nLines
-                [rawDataLmks.hmgCoords(:,i), ~] = seg2hmgLin(rawDataLmks.coord(:,i));
-            end
-            
-            % --------------------------------------------------------
-            % check all possible lines
+            % find possible matching lines within n-sigma-range
+            possibleMatches = zeros(size(rawDataLmks.lines, 1), size(rawDataLmks.lines, 2) + 1);
             j = 1;
-            possibleMatches = zeros(nLines, size(rawDataLmks.lines, 2) + 1);
-            for i = 1:nLines
+            for i = 1:size(rawDataLmks.lines, 1)
+                
+                % --------------------------------------------------------
+                % homogenous coordinates of raw lines
+                [rawDataLmks.hmgCoords(:,i), ~] = seg2hmgLin(rawDataLmks.coord(:,i));
                 
                 % --------------------------------------------------------
                 % normalize raw line
@@ -101,27 +97,48 @@ switch Raw.type
                 if (raw_l > obs_l - l_sigma && raw_l < obs_l + l_sigma && ...
                     raw_m > obs_m - m_sigma && raw_m < obs_m + m_sigma && ...
                     raw_n > obs_n - n_sigma && raw_n < obs_n + n_sigma)
-                    
+                   
                     possibleMatches(j,1:80) = rawDataLmks.lines(i,:);
                     possibleMatches(j,81) = i;
-                    %plotSegLine(rawDataLmks.coord(:,i), 'blue--*');
+                    
                     j = j + 1;
                 end
             end
-            
-            %plotHmgLine(Obs.exp.e, 'green');
-            %plotSegLine(Obs.meas.y, 'magenta--*');
-            
-            hold off
-                        
+                                    
             % --------------------------------------------------------
             % select only possible matches
             possibleMatches = possibleMatches(1:j-1,:);
             
-            %matchedLine = MatchLines(Obs.meas.line, possibleMatches);
+            % --------------------------------------------------------
+            % match lines by descriptor
             matchedLine = MatchLinesByDesc(Obs.meas.line, possibleMatches);
             
-            if (matchedLine ~= -1)
+            % --------------------------------------------------------
+            % plot lines
+%             hold on
+%             
+%             h = 0;
+%             
+%             % all possible matches
+%             for i = 1:size(possibleMatches, 1)
+%                 h(i) = plotSegLine(possibleMatches(i,1:4), 'blue--*');
+%             end
+%             
+%             % current observation (line + segment)
+%             h(end+1) = plotHmgLine(Obs.exp.e, 'green');
+%             h(end+1) = plotSegLine(Obs.meas.y, 'magenta--*');
+%             
+%             % matched line segment
+%             if (size(possibleMatches, 1) > 0)
+%                 h(end+1) = plotSegLine(possibleMatches(matchedLine + 1, 1:4)', 'yellow--*');
+%             end
+%             
+%             delete(h);
+%             hold off
+            
+            % --------------------------------------------------------
+            % assign new observation coordinates          
+            if (matchedLine ~= -1)                
                 Obs.meas.y   = possibleMatches(matchedLine + 1, 1:4)';
                 Obs.meas.R   = R;
                 Obs.measured = true;
@@ -132,7 +149,6 @@ switch Raw.type
                 Obs.measured = false;
                 Obs.matched  = false;
             end
-            
         else
             Obs.meas.y   = zeros(size(Obs.meas.y));
             Obs.meas.R   = R;

@@ -7,9 +7,10 @@ function [] = plotLines(image, lines, hFigureImage)
     bottom  = 100;
     width   = screens(2,3) - 100;
     height  = screens(2,4) - 200;
-    set(hFigureImage, 'Position', [left, bottom, width, height]);
     
     imshow(image);
+    
+    axis on
     
     hold on;
     

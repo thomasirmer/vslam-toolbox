@@ -1,4 +1,4 @@
-function [] = plotHmgLine(e, style)
+function [ h ] = plotHmgLine(e, style)
     % homogenous line coordinates
     l = e(1);
     m = e(2);
@@ -9,5 +9,5 @@ function [] = plotHmgLine(e, style)
     y = - (n + l * x) / m;
     
     % plotting
-    plot(x, y, style);
+    h = plot(x, y, style);
 end

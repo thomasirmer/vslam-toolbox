@@ -51,8 +51,8 @@ Robot{1} = struct(...                     % ODOMETRY EXAMPLE
   'orientationStd',     [0;0;0],...     % orient. error, std, in degrees
   'dx',                 [0;0;0],...     % position increment 8
   'daDegrees',          [0;0;0],...     % angle increment, degrees 9
-  'dxStd',              0.02*[1;1;1],...  % odo linear error std
-  'daStd',              0.002*[1;1;1]);     % odo ang error std, degrees
+  'dxStd',              0.002*[1;1;1],...  % odo linear error std
+  'daStd',              0.0002*[1;1;1]);     % odo ang error std, degrees
 % }
 
 %{
@@ -82,12 +82,12 @@ Sensor{1} = struct(...
   'type',               'pinHole',...   % type of sensor
   'robot',              1,...           % robot where it is mounted
   'position',           [0;0;0],...     % position in robot
-  'orientationDegrees', [90;180;90],...     % orientation in robot, roll pitch yaw
+  'orientationDegrees', [0;0;0],...     % orientation in robot, roll pitch yaw
   'positionStd',        [0;0;0],...     % position error std
   'orientationStd',     [0;0;0],...     % orient. error std
-  'imageSize',          [600;600],...   % image size
+  'imageSize',          [512;512],...   % image size
   'pixErrorStd',        1.0,...         % pixel error std
-  'intrinsic',          [322;239;249;249],... % intrinsic params u0, v0, ax, ay
+  'intrinsic',          [510;510;256;256],... % intrinsic params u0, v0, ax, ay
   'distortion',         [],...          % distortion params
   'frameInMap',         true,...        % add sensor frame in slam map?
   'imGrid',             struct(...      % grid for Active Search
@@ -98,12 +98,12 @@ Sensor{1} = struct(...
 % Estimation options 
 Opt = struct(...
   'map',              struct(...    % options for the map
-    'numLmks',        27,...         % number of 3d landmarks
+    'numLmks',        32,...         % number of 3d landmarks
     'lmkSize',        11),...         % Size of landmark
   'correct',          struct(...    % options for lmk correction
     'reprojectLmks',  true,...       % reproject lmks after active search?
     'reparametrize',  true,...       % reparametrize lmk?
-    'nUpdates',       16,...         % max simultaneus updates
+    'nUpdates',       20,...         % max simultaneus updates
     'MD2th',          9,...          % Threshold on Mahalanobis distance squared
     'linTestIdp',     0.1,...        % threshold on IDP linearity test
     'lines',          struct(...     % options for line corrections
@@ -111,7 +111,7 @@ Opt = struct(...
       'extPolicy',    true,...       % line extending policy ?
       'extSwitch',    2)),...        % extension policy switch point in pixels
   'init',             struct(...    % Options for initialization
-    'nbrInits',       [15 0],...      % number of inits [firstFrame, otherFrames]
+    'nbrInits',       [20 8],...      % number of inits [firstFrame, otherFrames]
     'initType',       'idpLin',...   % Type of lmk to use for init
     'idpPnt',         struct(...     % options for lmk initialization
       'nonObsMean',   .1,...          % mean of non obs
@@ -168,7 +168,7 @@ FigOpt = struct(...
     'view',         [-60 20 40 17],... % viewpoint of the 3d figure [30 45 40 20]
     'orbit',        [0 0],... % AZ and EL orbit angle increments - [0.25 0.05]
     'showSimLmk',   true,...       % show simulated landmarks?
-    'showEllip',    true,...        % show ellipsoids?
+    'showEllip',    false,...        % show ellipsoids?
     'colors',       struct(...      % map figure colors
       'border',     [1 1 1],...      %   [r g b]      
       'axes',       [0 0 0],...      % with:
@@ -192,7 +192,7 @@ FigOpt = struct(...
       'label',      [.0 .5 0])),...  % landmark ID labels
   'sensor',         struct(...      % sensor figures options
     'size',         [640 480],...    % sensor figure size
-    'showEllip',    false,...        % show ellipses?
+    'showEllip',    true,...        % show ellipses?
     'colors',       struct(...       % Sensor figure colors:
       'border',     .8*[1 1 1],...    %    
       'axes',       [0 0 0],...       % 

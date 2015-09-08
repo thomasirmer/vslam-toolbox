@@ -33,6 +33,11 @@ tic;
 
 % clear workspace and declare globals
 clear
+
+% close all windows
+close all;
+close all hidden;
+
 global Map    
 
 %% I. Specify user-defined options - EDIT USER DATA FILE userData.m
@@ -128,10 +133,10 @@ for rob = [Rob.rob]
         Raw(sen).data.segments.lines = lines;
         
         % ---- PLOTTING ----
-%         if exist('hFigureImage', 'var') == 0
-%             hFigureImage = figure;
-%         end   
-%         plotLines(image, lines, hFigureImage);
+        if exist('hFigureImage', 'var') == 0
+            hFigureImage = figure;
+        end   
+        plotLines(image, lines, hFigureImage);
         
         clear image lines;
     end
