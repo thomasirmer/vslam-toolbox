@@ -115,26 +115,29 @@ switch Raw.type
             
             % --------------------------------------------------------
             % plot lines
-%             hold on
-%             
-%             h = 0;
-%             
-%             % all possible matches
-%             for i = 1:size(possibleMatches, 1)
-%                 h(i) = plotSegLine(possibleMatches(i,1:4), 'blue--*');
-%             end
-%             
-%             % current observation (line + segment)
-%             h(end+1) = plotHmgLine(Obs.exp.e, 'green');
-%             h(end+1) = plotSegLine(Obs.meas.y, 'magenta--*');
-%             
-%             % matched line segment
-%             if (size(possibleMatches, 1) > 0)
-%                 h(end+1) = plotSegLine(possibleMatches(matchedLine + 1, 1:4)', 'yellow--*');
-%             end
-%             
-%             delete(h);
-%             hold off
+            hold on
+            
+            h = 0;
+            
+            % current observation (line + segment)
+            h(1) = plotHmgLine(Obs.exp.e, 'green');
+            h(2) = plotSegLine(Obs.meas.y, 'magenta--*');
+            
+            % all possible matches
+            nPossibleMatches = size(possibleMatches, 1);
+            if (nPossibleMatches > 0)
+                for i = 1:nPossibleMatches
+                    h(i+2) = plotSegLine(possibleMatches(i,1:4), 'blue--*');
+                end
+            end
+            
+            % matched line
+            if (matchedLine >= 0)
+                h(end+1) = plotSegLine(possibleMatches(matchedLine + 1, 1:4)', 'yellow--*');
+            end
+            
+            delete(h);
+            hold off
             
             % --------------------------------------------------------
             % assign new observation coordinates          

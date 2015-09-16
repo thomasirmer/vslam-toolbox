@@ -24,7 +24,7 @@
 Time = struct(...
   'dt',                   .1,...          % sampling time, seconds
   'firstFrame',           1,...           % first frame #
-  'lastFrame',            11);           % last frame #
+  'lastFrame',            10);           % last frame #
 
 % Simulated world
 %   - Simulation landmark sets, playground dimensions
@@ -39,7 +39,7 @@ World = struct(...
 %       'constVel'    6D Constant velocity model
 %       'odometry'    6D Odometry model
 %   - See EULERANGLES for orientations specifications.
-% {
+%{
 Robot{1} = struct(...                     % ODOMETRY EXAMPLE
   'id',                 1,...           % robot identifier
   'name',               'Dala',...      % robot name
@@ -49,13 +49,13 @@ Robot{1} = struct(...                     % ODOMETRY EXAMPLE
   'orientationDegrees', [0;0;0],...     % orientation, in degrees, roll pitch yaw.
   'positionStd',        [0;0;0],...     % position error, std
   'orientationStd',     [0;0;0],...     % orient. error, std, in degrees
-  'dx',                 [0;0;0],...     % position increment 8
-  'daDegrees',          [0;0;0],...     % angle increment, degrees 9
+  'dx',                 [0.1;0;0],...     % position increment 8
+  'daDegrees',          [0;0;2],...     % angle increment, degrees 9
   'dxStd',              0.002*[1;1;1],...  % odo linear error std
   'daStd',              0.0002*[1;1;1]);     % odo ang error std, degrees
-% }
+%}
 
-%{
+% {
  Robot{1} = struct(...                     % CONSTANT VELOCITY EXAMPLE
    'id',                 3,...           % robot identifier
    'name',               'Dala',...      % robot name
@@ -65,14 +65,14 @@ Robot{1} = struct(...                     % ODOMETRY EXAMPLE
   'orientationDegrees', [0;0;0],...     % orientation, in degrees, roll pitch yaw.
   'positionStd',        [0;0;0],...     % position error, std
   'orientationStd',     [0;0;0],...     % orient. error, std, degrees
-  'velocity',           [0;0;0],...     % lin. velocity
+  'velocity',           [5;0;0],...     % lin. velocity
   'angularVelDegrees',  [0;0;0],...    % ang. velocity, in degrees
-  'velStd',             [0;0;0],...     % lin. vel. error, std
-  'angVelStd',          [0;0;0],...     % ang. vel. error, std, degrees
+  'velStd',             [0.01;0.01;0.01],...     % lin. vel. error, std
+  'angVelStd',          [0.01;0.01;0.01],...     % ang. vel. error, std, degrees
   'dv',                 [0;0;0],...     % veolcity increment
   'dwDegrees',          [0;0;0],...     % ang. vel. increment, degrees
-  'dvStd',              [0;0;0],...  % vel perturbation std
-  'dwStd',              [0;0;0]);    % ang vel pert. std, degrees
+  'dvStd',              [0.01;0.01;0.01],...  % vel perturbation std
+  'dwStd',              [0.01;0.01;0.01]);    % ang vel pert. std, degrees
 %}
 
 
@@ -82,7 +82,7 @@ Sensor{1} = struct(...
   'type',               'pinHole',...   % type of sensor
   'robot',              1,...           % robot where it is mounted
   'position',           [0;0;0],...     % position in robot
-  'orientationDegrees', [0;0;0],...     % orientation in robot, roll pitch yaw
+  'orientationDegrees', [90;180;90],...     % orientation in robot, roll pitch yaw
   'positionStd',        [0;0;0],...     % position error std
   'orientationStd',     [0;0;0],...     % orient. error std
   'imageSize',          [512;512],...   % image size
