@@ -67,7 +67,7 @@ LineDescriptor::LineDescriptor()
 	srand ( time(NULL) );
 	//	cout<<"Call LineDescriptor constructor function"<<endl;
 	ksize_       = 5;
-	numOfOctave_ = 5;//5
+	numOfOctave_ = 1;//5
 	edLineVec_.resize(numOfOctave_);
 	for(unsigned int i=0; i<numOfOctave_; i++){
 		edLineVec_[i] = new EDLineDetector;
@@ -102,7 +102,7 @@ LineDescriptor::LineDescriptor(unsigned int numOfBand, unsigned int widthOfBand)
 	srand ( time(NULL) );
 	//	cout<<"Call LineDescriptor constructor function"<<endl;
 	ksize_       = 5;
-	numOfOctave_ = 5;//5
+	numOfOctave_ = 1;//5
 	edLineVec_.resize(numOfOctave_);
 	for(unsigned int i=0; i<numOfOctave_; i++){
 		edLineVec_[i] = new EDLineDetector;

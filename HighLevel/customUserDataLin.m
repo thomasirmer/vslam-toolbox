@@ -24,7 +24,7 @@
 Time = struct(...
   'dt',                   .1,...          % sampling time, seconds
   'firstFrame',           1,...           % first frame #
-  'lastFrame',            10);           % last frame #
+  'lastFrame',            2921);           % last frame #
 
 % Simulated world
 %   - Simulation landmark sets, playground dimensions
@@ -65,14 +65,14 @@ Robot{1} = struct(...                     % ODOMETRY EXAMPLE
   'orientationDegrees', [0;0;0],...     % orientation, in degrees, roll pitch yaw.
   'positionStd',        [0;0;0],...     % position error, std
   'orientationStd',     [0;0;0],...     % orient. error, std, degrees
-  'velocity',           [5;0;0],...     % lin. velocity
+  'velocity',           [0;0;0],...     % lin. velocity
   'angularVelDegrees',  [0;0;0],...    % ang. velocity, in degrees
-  'velStd',             [0.01;0.01;0.01],...     % lin. vel. error, std
-  'angVelStd',          [0.01;0.01;0.01],...     % ang. vel. error, std, degrees
+  'velStd',             [100;100;100],...     % lin. vel. error, std
+  'angVelStd',          [100;100;100],...     % ang. vel. error, std, degrees
   'dv',                 [0;0;0],...     % veolcity increment
   'dwDegrees',          [0;0;0],...     % ang. vel. increment, degrees
-  'dvStd',              [0.01;0.01;0.01],...  % vel perturbation std
-  'dwStd',              [0.01;0.01;0.01]);    % ang vel pert. std, degrees
+  'dvStd',              [0.1;0.1;0.1],...  % vel perturbation std
+  'dwStd',              [0.1;0.1;0.1]);    % ang vel pert. std, degrees
 %}
 
 
@@ -81,24 +81,24 @@ Sensor{1} = struct(...
   'name',               'Sensor1',...      % sensor name
   'type',               'pinHole',...   % type of sensor
   'robot',              1,...           % robot where it is mounted
-  'position',           [0;0;0],...     % position in robot
-  'orientationDegrees', [90;180;90],...     % orientation in robot, roll pitch yaw
+  'position',           [0;0;0.5],...     % position in robot
+  'orientationDegrees', [-120;0;-90],...     % orientation in robot, roll pitch yaw
   'positionStd',        [0;0;0],...     % position error std
   'orientationStd',     [0;0;0],...     % orient. error std
-  'imageSize',          [512;512],...   % image size
+  'imageSize',          [640;480],...   % image size
   'pixErrorStd',        1.0,...         % pixel error std
-  'intrinsic',          [510;510;256;256],... % intrinsic params u0, v0, ax, ay
+  'intrinsic',          [535.4;539.2;320.1;247.6],... % intrinsic params u0, v0, ax, ay
   'distortion',         [],...          % distortion params
   'frameInMap',         true,...        % add sensor frame in slam map?
   'imGrid',             struct(...      % grid for Active Search
-  'numCells',           [5;5],...       % number of H and V grid cells
+  'numCells',           [8;6],...       % number of H and V grid cells
   'skipOuter',          false));        % skip outer cells for initialization?
 
 
 % Estimation options 
 Opt = struct(...
   'map',              struct(...    % options for the map
-    'numLmks',        32,...         % number of 3d landmarks
+    'numLmks',        128,...         % number of 3d landmarks
     'lmkSize',        11),...         % Size of landmark
   'correct',          struct(...    % options for lmk correction
     'reprojectLmks',  true,...       % reproject lmks after active search?
@@ -108,10 +108,10 @@ Opt = struct(...
     'linTestIdp',     0.1,...        % threshold on IDP linearity test
     'lines',          struct(...     % options for line corrections
       'innType',      'ortDst',...    % innovation type for lines
-      'extPolicy',    true,...       % line extending policy ?
+      'extPolicy',    false,...       % line extending policy ?
       'extSwitch',    2)),...        % extension policy switch point in pixels
   'init',             struct(...    % Options for initialization
-    'nbrInits',       [20 8],...      % number of inits [firstFrame, otherFrames]
+    'nbrInits',       [10 3],...      % number of inits [firstFrame, otherFrames]
     'initType',       'idpLin',...   % Type of lmk to use for init
     'idpPnt',         struct(...     % options for lmk initialization
       'nonObsMean',   .1,...          % mean of non obs

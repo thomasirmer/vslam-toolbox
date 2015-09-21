@@ -80,6 +80,11 @@ customUserDataLin;
 % Clear user data - not needed anymore
 clear Robot Sensor World Time   % clear all user data
 
+% select dataset
+directory = './Datasets/bigDatasetsTUM/rgbd_dataset_freiburg3_long_office_household/rgb/';
+fileExtension = 'png';
+allFiles = dir([directory, '*', fileExtension]);
+
 %% IV. Main loop
 for currentFrame = Tim.firstFrame : Tim.lastFrame
     
@@ -110,7 +115,7 @@ for rob = [Rob.rob]
         Raw(sen).data.points    = struct('coord',[],'app',[]);
         
         % ----- READ IMAGES -----
-        imagePath = sprintf('./Datasets/corridor/%03d.png', currentFrame);
+        imagePath = sprintf([directory, allFiles(currentFrame).name]);
         image = imread(imagePath);        
         clear imagePath;
         
