@@ -5,7 +5,7 @@
 #include <time.h>
 
 #include "../CInterface/DataTypeParsing.hpp"
-#include "LineDescriptor.hpp"
+#include "./LineMatching/LineDescriptor.hpp"
 
 using namespace cv;
 using namespace std;

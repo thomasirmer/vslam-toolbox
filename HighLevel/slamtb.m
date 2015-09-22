@@ -31,14 +31,18 @@
 
 tic;
 
+% --------------------------------------------------------
 % clear workspace and declare globals
 clear
 
+% --------------------------------------------------------
 % close all windows
 close all;
 close all hidden;
 
-global Map    
+% --------------------------------------------------------
+% global variables
+global Map
 
 %% I. Specify user-defined options - EDIT USER DATA FILE userData.m
 
@@ -77,48 +81,59 @@ customUserDataLin;
 % plotting. Think about collecting data in files using fopen, fwrite,
 % etc., instead of creating large Matlab variables for data logging.
 
+% --------------------------------------------------------
 % Clear user data - not needed anymore
-clear Robot Sensor World Time   % clear all user data
+clear Robot Sensor World Time
 
+% --------------------------------------------------------
 % select dataset
-directory = './Datasets/bigDatasetsTUM/rgbd_dataset_freiburg3_long_office_household/rgb/';
+[baseDir, ~, ~] = fileparts(mfilename('fullpath'));
+baseDir = [baseDir, '/Datasets/'];
+directory = [baseDir, 'TestVideo5/'];
+
+directory = 'C:/Users/thomai/Documents/Development/Matlab/slamtoolbox/HighLevel/Datasets/TestVideo4/';
 fileExtension = 'png';
 allFiles = dir([directory, '*', fileExtension]);
 
 %% IV. Main loop
-for currentFrame = Tim.firstFrame : Tim.lastFrame
+for currentFrame = Tim.firstFrame : 3 : Tim.lastFrame
     
     % 1. SIMULATION
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %{
+    % Simulate robots
+    for rob = [SimRob.rob]
 
-%     % Simulate robots
-%     for rob = [SimRob.rob]
-% 
-%         % Robot motion
-%         SimRob(rob) = simMotion(SimRob(rob),Tim);
-%         
-%         % Simulate sensor observations
-%         for sen = SimRob(rob).sensors
-% 
-%             % Observe simulated landmarks
-%             Raw(sen) = simObservation(SimRob(rob), SimSen(sen), SimLmk, SimOpt) ;
-% 
-%         end % end process sensors
-% 
-%     end % end process robots
+        % Robot motion
+        SimRob(rob) = simMotion(SimRob(rob),Tim);
+        
+        % Simulate sensor observations
+        for sen = SimRob(rob).sensors
+
+            % Observe simulated landmarks
+            Raw(sen) = simObservation(SimRob(rob), SimSen(sen), SimLmk, SimOpt) ;
+
+        end % end process sensors
+
+    end % end process robots
+    %}
 
 for rob = [Rob.rob]
     for sen = Rob(rob).sensors
+        % --------------------------------------------------------
+        % init raw structure for use with real images
         Raw(sen).type           = 'image';
         Raw(sen).data           = struct('points',[],'segments',[], 'img',[]);
         Raw(sen).data.segments  = struct('coord',[],'app',[]);
         Raw(sen).data.points    = struct('coord',[],'app',[]);
         
-        % ----- READ IMAGES -----
+        % --------------------------------------------------------
+        % read image
         imagePath = sprintf([directory, allFiles(currentFrame).name]);
         image = imread(imagePath);        
         clear imagePath;
         
+        % --------------------------------------------------------
         % convert to gray image
         [~, ~, d1] = size(image);
         if (d1 > 1)
@@ -128,21 +143,26 @@ for rob = [Rob.rob]
         end
         clear d1;
 
-        % ----- LINE DETECTION -----
+        % --------------------------------------------------------
+        % detect lines
         lines = FindNLineFeatures(image, 64);
         
+        % --------------------------------------------------------
         % assign to Raw structure
         Raw(sen).data.img            = image;
         Raw(sen).data.segments.coord = lines(:, 1:4)';
         Raw(sen).data.segments.app   = 1:size(lines, 1);
         Raw(sen).data.segments.lines = lines;
         
-        % ---- PLOTTING ----
+        % --------------------------------------------------------
+        % plot image and detected lines
         if exist('hFigureImage', 'var') == 0
             hFigureImage = figure;
         end   
         plotLines(image, lines, hFigureImage);
         
+        % --------------------------------------------------------
+        % clear temporary variables
         clear image lines;
     end
 end
@@ -168,6 +188,8 @@ end
         % Process sensor observations
         for sen = Rob(rob).sensors
 
+            % --------------------------------------------------------
+            % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
             % Observe known landmarks
             [Rob(rob),Sen(sen),Lmk,Obs(sen,:)] = correctKnownLmks( ...
                 Rob(rob),   ...
@@ -176,6 +198,8 @@ end
                 Lmk,        ...   
                 Obs(sen,:), ...
                 Opt) ;
+            % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
+            % --------------------------------------------------------
 
             % Initialize new landmarks
             ninits = Opt.init.nbrInits(1 + (currentFrame ~= Tim.firstFrame));

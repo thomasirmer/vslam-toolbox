@@ -67,12 +67,12 @@ Robot{1} = struct(...                     % ODOMETRY EXAMPLE
   'orientationStd',     [0;0;0],...     % orient. error, std, degrees
   'velocity',           [0;0;0],...     % lin. velocity
   'angularVelDegrees',  [0;0;0],...    % ang. velocity, in degrees
-  'velStd',             [100;100;100],...     % lin. vel. error, std
-  'angVelStd',          [100;100;100],...     % ang. vel. error, std, degrees
+  'velStd',             [10;10;10],...     % lin. vel. error, std
+  'angVelStd',          [10;10;10],...     % ang. vel. error, std, degrees
   'dv',                 [0;0;0],...     % veolcity increment
   'dwDegrees',          [0;0;0],...     % ang. vel. increment, degrees
-  'dvStd',              [0.1;0.1;0.1],...  % vel perturbation std
-  'dwStd',              [0.1;0.1;0.1]);    % ang vel pert. std, degrees
+  'dvStd',              [2;2;2],...  % vel perturbation std
+  'dwStd',              [5;5;5]);    % ang vel pert. std, degrees
 %}
 
 
@@ -85,9 +85,9 @@ Sensor{1} = struct(...
   'orientationDegrees', [-120;0;-90],...     % orientation in robot, roll pitch yaw
   'positionStd',        [0;0;0],...     % position error std
   'orientationStd',     [0;0;0],...     % orient. error std
-  'imageSize',          [640;480],...   % image size
+  'imageSize',          [960;544],...   % image size
   'pixErrorStd',        1.0,...         % pixel error std
-  'intrinsic',          [535.4;539.2;320.1;247.6],... % intrinsic params u0, v0, ax, ay
+  'intrinsic',          [336,337,514,264],... % intrinsic params u0, v0, ax, ay
   'distortion',         [],...          % distortion params
   'frameInMap',         true,...        % add sensor frame in slam map?
   'imGrid',             struct(...      % grid for Active Search

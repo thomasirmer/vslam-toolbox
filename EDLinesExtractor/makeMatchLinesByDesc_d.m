@@ -1,2 +1,2 @@
 disp('Compiling MatchLinesByDesc.cpp');
-mexOpenCV -g 'MatchLinesByDesc.cpp' 'LineDescriptor.cpp' 'EDLineDetector.cpp'
+mexOpenCV 'MatchLinesByDesc.cpp' './LineMatching/LineDescriptor.cpp' './LineMatching/EDLineDetector.cpp'

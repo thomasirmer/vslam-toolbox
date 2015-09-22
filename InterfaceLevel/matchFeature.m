@@ -39,7 +39,6 @@ switch Raw.type
     case 'image'
         % --------------------------------------------------------
         % ----- ACTIVE-SEARCH FOR REAL IMAGES IMPLEMENTATION -----
-
         id  = Obs.lid;
         idx = find(rawDataLmks.app == id, 1);
         
