@@ -13,138 +13,123 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Quelldateien\EDLineDetector">
-      <UniqueIdentifier>{93bd9a4b-7963-44e0-bf10-2b3f4c0df185}</UniqueIdentifier>
+    <Filter Include="Quelldateien\cppMigartion">
+      <UniqueIdentifier>{482748d6-baa4-4e26-ae34-5193eab0a2d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\EDLineDetector\RedSVD">
-      <UniqueIdentifier>{55f3848d-4058-4ccc-9715-d277be0c6a73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\EDLineDetector\LineMatchingChristopher">
-      <UniqueIdentifier>{333161a3-ddb3-45c2-ac65-ca39f31157f3}</UniqueIdentifier>
+    <Filter Include="Quelldateien\lineMatching">
+      <UniqueIdentifier>{3760ac24-06b1-430e-87b5-9ebb323e7c41}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Points\fromFrame_c.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Math\normvec_c.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\FrameTransforms\updateFrame_c.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\MatrixRoi.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\PassingStructureExample2.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\PassingStructuresExample.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\MatrixTranspose.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClCompile>
     <ClCompile Include="..\..\MatrixMul.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\HighLevel\userDataLin.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="..\..\MatrixRoi.cpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="..\..\MatrixTranspose.cpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\EDLinesExtractor\EDLineDetector.cpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
+    <ClCompile Include="..\..\..\Math\normvec_c.cpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\EDLinesExtractor\LineDescriptor.cpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
+    <ClCompile Include="..\..\PassingStructureExample2.cpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.cpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor.cpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
+    <ClCompile Include="..\..\PassingStructuresExample.cpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\HighLevel\persistenceTest.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor_Persistence.cpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
+    <ClCompile Include="..\..\..\FrameTransforms\updateFrame_c.cpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\LineFeature.cpp">
-      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
+    <ClCompile Include="..\..\..\HighLevel\userDataLin.cpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Reader.cpp">
-      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\VideoMatcher.cpp">
-      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
+    <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\EDLinesExtractor\FindNLineFeatures.cpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\EDLinesExtractor\MatchLines.cpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
+      <Filter>Quelldateien\lineMatching</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\EDLinesExtractor\MatchLinesByDesc.cpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
+      <Filter>Quelldateien\lineMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\EDLineDetector.cpp">
+      <Filter>Quelldateien\lineMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\LineDescriptor.cpp">
+      <Filter>Quelldateien\lineMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\LineFeature.cpp">
+      <Filter>Quelldateien\lineMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\PairwiseLineMatching.cpp">
+      <Filter>Quelldateien\lineMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\Reader.cpp">
+      <Filter>Quelldateien\lineMatching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\VideoMatcher.cpp">
+      <Filter>Quelldateien\lineMatching</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\DataTypeParsing.hpp">
-      <Filter>Quelldateien</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\FrameTransforms\Rotations\q2R_c.hpp">
-      <Filter>Quelldateien</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\FrameTransforms\Rotations\pi2pc_c.hpp">
-      <Filter>Quelldateien</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\FrameTransforms\Rotations\q2pi_c.hpp">
-      <Filter>Quelldateien</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\DataManagement\split_c.hpp">
-      <Filter>Quelldateien</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\MatrixRoi.hpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\FrameTransforms\frame_c.hpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\cppMigartion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MatrixRoi.hpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\FrameTransforms\Rotations\pi2pc_c.hpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClInclude>
     <ClInclude Include="..\..\PrintOpenCVStructures.hpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\cppMigartion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\FrameTransforms\Rotations\q2pi_c.hpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\FrameTransforms\Rotations\q2R_c.hpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\DataManagement\split_c.hpp">
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\FrameTransforms\Rotations\v2au.hpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\cppMigartion</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\EDLinesExtractor\EDLineDetector.hpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\EDLineDetector.hpp">
+      <Filter>Quelldateien\lineMatching</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineDescriptor.hpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\LineDescriptor.hpp">
+      <Filter>Quelldateien\lineMatching</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineStructure.hpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\LineFeature.h">
+      <Filter>Quelldateien\lineMatching</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.hpp">
-      <Filter>Quelldateien\EDLineDetector</Filter>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\LineStructure.hpp">
+      <Filter>Quelldateien\lineMatching</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\EDLinesExtractor\redsvd\RedSVD.h">
-      <Filter>Quelldateien\EDLineDetector\RedSVD</Filter>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\PairwiseLineMatching.hpp">
+      <Filter>Quelldateien\lineMatching</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\LineFeature.h">
-      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\Reader.h">
+      <Filter>Quelldateien\lineMatching</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Reader.h">
-      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\Split.h">
+      <Filter>Quelldateien\lineMatching</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Split.h">
-      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\VideoMatcher.h">
-      <Filter>Quelldateien\EDLineDetector\LineMatchingChristopher</Filter>
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\VideoMatcher.h">
+      <Filter>Quelldateien\lineMatching</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -77,17 +77,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\EDLinesExtractor\EDLineDetector.cpp" />
-    <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor.cpp" />
-    <ClCompile Include="..\..\..\EDLinesExtractor\EDLinesExtractor_Persistence.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\FindNLineFeatures.cpp" />
-    <ClCompile Include="..\..\..\EDLinesExtractor\LineDescriptor.cpp" />
-    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\LineFeature.cpp" />
-    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Reader.cpp" />
-    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\VideoMatcher.cpp" />
-    <ClCompile Include="..\..\..\EDLinesExtractor\MatchLines.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\EDLineDetector.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\LineDescriptor.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\LineFeature.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\PairwiseLineMatching.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\Reader.cpp" />
+    <ClCompile Include="..\..\..\EDLinesExtractor\LineMatching\VideoMatcher.cpp" />
     <ClCompile Include="..\..\..\EDLinesExtractor\MatchLinesByDesc.cpp" />
-    <ClCompile Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\Rotations\v2q_c.cpp" />
     <ClCompile Include="..\..\..\FrameTransforms\updateFrame_c.cpp" />
     <ClCompile Include="..\..\..\HighLevel\persistenceTest.cpp" />
@@ -102,15 +99,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\DataManagement\split_c.hpp" />
-    <ClInclude Include="..\..\..\EDLinesExtractor\EDLineDetector.hpp" />
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineDescriptor.hpp" />
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\LineFeature.h" />
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Reader.h" />
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\Split.h" />
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatchingChristopher\VideoMatcher.h" />
-    <ClInclude Include="..\..\..\EDLinesExtractor\LineStructure.hpp" />
-    <ClInclude Include="..\..\..\EDLinesExtractor\PairwiseLineMatching.hpp" />
-    <ClInclude Include="..\..\..\EDLinesExtractor\redsvd\RedSVD.h" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\EDLineDetector.hpp" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\LineDescriptor.hpp" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\LineFeature.h" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\LineStructure.hpp" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\PairwiseLineMatching.hpp" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\Reader.h" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\Split.h" />
+    <ClInclude Include="..\..\..\EDLinesExtractor\LineMatching\VideoMatcher.h" />
     <ClInclude Include="..\..\..\FrameTransforms\frame_c.hpp" />
     <ClInclude Include="..\..\..\FrameTransforms\Rotations\pi2pc_c.hpp" />
     <ClInclude Include="..\..\..\FrameTransforms\Rotations\q2pi_c.hpp" />

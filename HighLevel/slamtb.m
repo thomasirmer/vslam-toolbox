@@ -87,16 +87,12 @@ clear Robot Sensor World Time
 
 % --------------------------------------------------------
 % select dataset
-[baseDir, ~, ~] = fileparts(mfilename('fullpath'));
-baseDir = [baseDir, '/Datasets/'];
-directory = [baseDir, 'TestVideo5/'];
-
 directory = 'C:/Users/thomai/Documents/Development/Matlab/slamtoolbox/HighLevel/Datasets/TestVideo4/';
-fileExtension = 'png';
+fileExtension = '.png';
 allFiles = dir([directory, '*', fileExtension]);
 
 %% IV. Main loop
-for currentFrame = Tim.firstFrame : 3 : Tim.lastFrame
+for currentFrame = Tim.firstFrame : Tim.lastFrame
     
     % 1. SIMULATION
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
